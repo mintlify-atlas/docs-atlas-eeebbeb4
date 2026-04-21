@@ -1,0 +1,81 @@
+---
+title: "Installing Create: Simulated on NeoForge 1.21.1"
+description: "Step-by-step guide to downloading and installing Create: Simulated — Simulated, Aeronautics, and Offroad modules — on NeoForge 21.1.219 for Minecraft 1.21.1."
+---
+
+Create: Simulated is distributed as three separate modules — **Simulated**, **Aeronautics**, and **Offroad** — all available from the same Modrinth project page. You can install any combination of modules, but Simulated is required by both Aeronautics and Offroad.
+
+## Prerequisites
+
+Before installing, make sure you have the following:
+
+| Requirement | Version |
+|---|---|
+| Minecraft Java Edition | 1.21.1 |
+| NeoForge | 21.1.219 or later |
+| Create | 6.0.9 |
+
+<Warning>
+  Fabric and Forge are **not** supported. Create: Simulated runs exclusively on **NeoForge 21.1.219+**. Using the wrong mod loader will prevent the game from launching.
+</Warning>
+
+## Install the modules
+
+<Steps>
+  <Step title="Install NeoForge">
+    Download the NeoForge 21.1.219 (or later) installer from the [NeoForge project site](https://neoforged.net/) and run it. Select **Install client** (or **Install server** for a dedicated server), then point it at your Minecraft 1.21.1 installation directory.
+  </Step>
+
+  <Step title="Install Create">
+    Create: Simulated depends on Create 6.0.9. Download it from [Modrinth](https://modrinth.com/mod/create) and place the JAR file in your `mods/` folder. Create itself requires **Flywheel 1.0.6**, which is bundled inside the Create download — no separate install needed.
+  </Step>
+
+  <Step title="Download Create: Simulated">
+    Go to the [Create: Simulated Modrinth page](https://modrinth.com/project/create-aeronautics) and open the **Versions** tab. Filter by game version **1.21.1** and loader **NeoForge**, then download the JAR files for the modules you want:
+
+    - **`simulated-<version>.jar`** — core physics, sensors, and redstone blocks (required by other modules)
+    - **`aeronautics-<version>.jar`** — hot air balloons, propellers, and Levitite (optional, requires Simulated)
+    - **`offroad-<version>.jar`** — wheels, tires, and the Borehead Bearing drill (optional, requires Simulated)
+  </Step>
+
+  <Step title="Add the JARs to your mods folder">
+    Copy every downloaded JAR into your `mods/` folder. The typical paths are:
+
+    - **Windows:** `%AppData%\.minecraft\mods\`
+    - **macOS:** `~/Library/Application Support/minecraft/mods/`
+    - **Linux:** `~/.minecraft/mods/`
+
+    If you use a custom launcher (Prism Launcher, ATLauncher, CurseForge App), use that launcher's built-in **mods** panel to add the files instead.
+  </Step>
+
+  <Step title="Launch and verify">
+    Start the game using the NeoForge 1.21.1 profile. On the main menu, open **Mods** and confirm that `simulated`, `aeronautics`, and `offroad` (whichever you installed) appear in the list with version **1.0.3**. If any module is missing, check that the JAR is in the correct `mods/` folder and that you are running the right NeoForge profile.
+  </Step>
+</Steps>
+
+<Note>
+  The three modules are fully independent of each other — except that **Aeronautics** and **Offroad** both require **Simulated** to be present. You can run Simulated alone without installing the other two.
+</Note>
+
+## Module overview
+
+| Module | Mod ID | What it adds |
+|---|---|---|
+| Simulated | `simulated` | Physics Assembler, Steering Wheel, Throttle Lever, Swivel Bearing, sensors, redstone components |
+| Aeronautics | `aeronautics` | Hot Air Burners, Propeller Bearings, Levitite anti-gravity fluid |
+| Offroad | `offroad` | Wheel Mounts, tires of all sizes, Borehead Bearing drill |
+
+<CardGroup cols={2}>
+  <Card title="Getting started" icon="rocket" href="/getting-started">
+    Build your first physics contraption after installing
+  </Card>
+  <Card title="Simulated module" icon="atom" href="/simulated/overview">
+    Explore the core blocks and physics assembly tools
+  </Card>
+  <Card title="Aeronautics module" icon="wind" href="/aeronautics/overview">
+    Learn about lift, propulsion, and Levitite
+  </Card>
+  <Card title="Offroad module" icon="truck-monster" href="/offroad/overview">
+    Set up wheels and the Borehead Bearing for ground vehicles
+  </Card>
+</CardGroup>

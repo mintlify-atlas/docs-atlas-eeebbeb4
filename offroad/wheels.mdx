@@ -1,0 +1,90 @@
+---
+title: "Wheels — Wheel Mounts, Tires, and Rock Cutting"
+description: "Use Wheel Mounts and tires to build driveable ground contraptions. Four tire sizes trade off speed and torque. Add Rock Cutting Wheels to drive through stone."
+---
+
+The Wheel Mount is the building block of every Offroad land vehicle. It holds a tire, transmits drive force to the ground, and responds to braking and steering signals over redstone. Pair Wheel Mounts with a Steering Wheel and Throttle Lever from the Simulated module to create a fully player-controlled vehicle.
+
+## Wheel Mount
+
+The **Wheel Mount** is a directional block that accepts any tire-like item and drives it against the terrain. When included in an assembled contraption, it converts rotational stress into ground movement.
+
+| Property | Behavior |
+|---|---|
+| Stress impact | 16 SU |
+| Tire slot | Right-click with a tire to insert; right-click empty-handed to remove |
+| Redstone from top | Brakes the wheel, increasing friction and slowing the contraption |
+| Redstone from side | Steers the wheel toward the side the signal comes from |
+
+Place the Wheel Mount facing the direction the wheel should face outward from the contraption body — typically downward or outward from the chassis. Insert a tire by right-clicking the mounted block with the chosen tire item. The tire is visible on the mount and is removed when you right-click the mount with an empty hand.
+
+### Braking
+
+When you apply a redstone signal to the **top** of a Wheel Mount, the wheel brakes. Friction increases on that wheel, slowing the contraption. You can brake individual wheels selectively to assist turning.
+
+### Steering
+
+When you apply a redstone signal to the **side** of a Wheel Mount, the wheel steers toward that side. Wire two opposite Wheel Mounts to opposing sides to create left/right steering control. A player-operated **Steering Wheel** from the Simulated module can automate this signal routing.
+
+## Tire sizes
+
+Four tire items are available, each suited to different vehicles. Insert any of them into a Wheel Mount by right-clicking.
+
+| Tire | Crafting materials | Size | Best for |
+|---|---|---|---|
+| **Small Tire** | Shaft + Dried Kelp (shapeless) | 1 block | Compact frames, low clearance |
+| **Tire** | Shaft + Dried Kelp (shaped cross) | Standard | General-purpose vehicles |
+| **Large Tire** | Shaft + Belts (shaped cross) | Large | Off-terrain and hill climbing |
+| **Monstrous Tire** | Shaft + Dried Kelp Blocks (shaped cross) | Extra-large | Heavy haulers, maximum clearance |
+
+<Tip>
+  Larger tires provide more clearance and traction on rough terrain, but they add mass and require more torque to reach the same top speed. Match tire size to your power source.
+</Tip>
+
+## Rock Cutting Wheel
+
+The **Rock Cutting Wheel** is a special block that acts as a tire-like item — you can insert it into a Wheel Mount. Unlike tires, it is designed to break stone and rock-type blocks that the contraption drives into, rather than roll over terrain cleanly.
+
+| Property | Value |
+|---|---|
+| Stress impact | Actor-based |
+| Effective on | Stone, rock, and related blocks |
+| Crafting | Crushing Wheel + Industrial Iron Block + Iron Sheet (vertical) |
+
+Mount a Rock Cutting Wheel on the front face of a vehicle to clear a path through stone terrain. The wheel breaks blocks in a range around itself as the contraption moves forward, dropping them as loot. Combine multiple Rock Cutting Wheels to clear a wider cross-section in a single pass.
+
+<Note>
+  The Rock Cutting Wheel cannot break all block types. It is effective on stone variants and similar rocky materials. Combine it with a Borehead Bearing for dedicated tunnel drilling.
+</Note>
+
+## Building a basic land vehicle
+
+<Steps>
+  <Step title="Assemble the chassis">
+    Build a frame for your vehicle. Glue all blocks together with Super Glue so the Physics Assembler can pick them up as a single contraption.
+  </Step>
+  <Step title="Add Wheel Mounts">
+    Place one Wheel Mount per wheel position on the underside or sides of the chassis, facing outward toward the ground. Use at least four mounts for a stable, steerable vehicle.
+  </Step>
+  <Step title="Insert tires">
+    Right-click each Wheel Mount with your chosen tire. All four mounts can use different tire types, but matching tires keep handling predictable.
+  </Step>
+  <Step title="Add a power source and controls">
+    Place a **Portable Engine** or other stress source on the frame. Add a **Steering Wheel** and **Throttle Lever** (from the Simulated module) so you can drive from inside the contraption.
+  </Step>
+  <Step title="Wire braking and steering">
+    Run redstone lines from your Steering Wheel output to the side faces of the front Wheel Mounts for steering, and from a brake lever to the top faces of all Wheel Mounts for braking.
+  </Step>
+  <Step title="Assemble with the Physics Assembler">
+    Place a Physics Assembler on or adjacent to the chassis, glue it in, hold right-click, and pull the lever to launch the structure as a physics contraption. The vehicle is now driveable.
+  </Step>
+</Steps>
+
+<CardGroup cols={2}>
+  <Card title="Offroad overview" icon="map" href="/offroad/overview">
+    All Offroad blocks and items at a glance
+  </Card>
+  <Card title="Physics Assembler" icon="hammer" href="/simulated/physics-assembler">
+    How to assemble and disassemble physics contraptions
+  </Card>
+</CardGroup>

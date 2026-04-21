@@ -1,122 +1,99 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Create: Simulated",
+  "theme": "palm",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#5c64f4",
+    "light": "#acb4fc",
+    "dark": "#ffffff"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "https://media.brand.dev/bdf1d847-06bd-4151-b03e-50a3e244afbd.png",
+  "logo": {
+    "light": "https://media.brand.dev/f5cf9483-55db-4419-81cb-331fd5cf7957.svg",
+    "dark": "https://media.brand.dev/f5cf9483-55db-4419-81cb-331fd5cf7957.svg"
+  },
+  "navbar": {
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/Creators-of-Aeronautics/Simulated-Project"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/Creators-of-Aeronautics/Simulated-Project"
+    }
+  },
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Get Started",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "introduction",
+              "installation",
+              "getting-started"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Simulated",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "simulated/overview",
+              "simulated/physics-assembler",
+              "simulated/kinetics",
+              "simulated/sensors",
+              "simulated/redstone",
+              "simulated/items"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Aeronautics",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "aeronautics/overview",
+              "aeronautics/hot-air",
+              "aeronautics/propellers",
+              "aeronautics/levitite",
+              "aeronautics/mounted-potato-cannon"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Offroad",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "offroad/overview",
+              "offroad/wheels",
+              "offroad/borehead-bearing"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Integration & API",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "ComputerCraft",
             "pages": [
-              "api-reference/introduction"
+              "integration/computercraft/overview",
+              "integration/computercraft/peripherals"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Mod API",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "integration/api/overview",
+              "integration/api/simulated-api",
+              "integration/api/aeronautics-api"
+            ]
+          },
+          {
+            "group": "Other Integrations",
+            "pages": [
+              "integration/jei",
+              "integration/compatibility"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    ]
   }
 }

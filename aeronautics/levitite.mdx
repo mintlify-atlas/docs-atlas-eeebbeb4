@@ -1,0 +1,83 @@
+---
+title: "Levitite — Anti-Gravity Blocks and Crystallization"
+description: "Levitite and Pearlescent Levitite provide passive anti-gravity lift to simulated contraptions. Obtain them by crystallizing Levitite Blend fluid using heat."
+---
+
+Levitite is a crystalline block that generates anti-gravity lift when attached to a simulated contraption. Unlike hot air or propellers, Levitite requires no ongoing power — once placed on your contraption, it keeps the structure afloat as long as enough blocks are present. You cannot gain altitude with Levitite alone, but it provides a stable base of lift that you combine with other force sources to fly.
+
+## Blocks and items
+
+### Levitite
+
+Levitite is the standard anti-gravity block. When your contraption carries enough Levitite, the collective lift counteracts gravity and keeps the structure suspended. The amount of lift each block provides is fixed, so you add more blocks to support heavier contraptions.
+
+Levitite emits a soft light (light level 10) and has the sound profile of amethyst. It is mined with a pickaxe.
+
+<Note>
+  Levitite significantly resists motion at low speeds. This drag drops off as the contraption moves faster, so initial acceleration from a standstill takes more force than sustaining speed.
+</Note>
+
+### Pearlescent Levitite
+
+Pearlescent Levitite is a rarer variant with its own connected-texture appearance. It behaves identically to standard Levitite in terms of lift and drag, but is harder to obtain — it forms only under specific crystallization conditions (see the [crystallization mechanic](#crystallization) below).
+
+### Levitite Blend
+
+Levitite Blend is a fluid that you pour or place in the world to eventually crystallize into Levitite blocks. It spreads like other fluids. Once crystallization starts, the reaction propagates through the entire connected body of fluid automatically.
+
+<Warning>
+  Levitite Blend spreads across open surfaces before crystallizing. Contain it in a mold or bounded area before triggering the reaction — once catalyzed, the process cannot be stopped and the fluid cannot be recollected.
+</Warning>
+
+### End Stone Powder
+
+End Stone Powder is an ingredient used in crafting or preparing Levitite Blend. Combine it with the appropriate materials to produce the fluid you will crystallize into Levitite blocks.
+
+## Crystallization
+
+Levitite Blend crystallizes into solid Levitite when it contacts sufficient heat. The reaction works as follows:
+
+1. Place Levitite Blend fluid in a contained area shaped to the footprint you want.
+2. Apply heat — a nearby heat source (such as a lava block or a Create heat source) catalyzes the reaction.
+3. Once started, the crystallization spreads through the entire fluid body on its own.
+4. The resulting solid blocks are permanent; they cannot be reverted to fluid.
+
+Certain blocks used to cast Levitite — such as mold blocks tagged as breakable — are destroyed during crystallization. Plan your mold material accordingly.
+
+To obtain **Pearlescent Levitite**, use specific casting conditions during crystallization. Check the in-game ponder scene (press **W** on a Levitite block) for the exact setup.
+
+## Obtaining and using Levitite
+
+<Steps>
+  <Step title="Craft End Stone Powder">
+    Grind End Stone in a Create mill to produce End Stone Powder, the base ingredient for Levitite Blend.
+  </Step>
+  <Step title="Produce Levitite Blend">
+    Combine End Stone Powder with the required materials to create Levitite Blend fluid. Store it in a bucket or tank.
+  </Step>
+  <Step title="Build a mold">
+    Construct a bounded mold in the shape and quantity of Levitite blocks you need. Use blocks that will survive crystallization, or intentionally use breakable blocks if you want the mold destroyed after casting.
+  </Step>
+  <Step title="Pour and crystallize">
+    Fill the mold with Levitite Blend, then expose the fluid to heat to trigger crystallization. Wait for the reaction to complete across the entire fluid body.
+  </Step>
+  <Step title="Place Levitite on your contraption">
+    Collect the resulting Levitite blocks and place them on your contraption structure before assembling it. The more blocks you include, the more lift the contraption receives.
+  </Step>
+  <Step title="Assemble and test">
+    Assemble your contraption and observe its behavior. Add more Levitite blocks if the structure is too heavy, or supplement with propellers or hot air to gain altitude.
+  </Step>
+</Steps>
+
+<Tip>
+  Levitite lift weakens as altitude increases, just like all other lift sources in Aeronautics. At high altitudes, air pressure drops and the effective lift per block decreases. Use an Altitude Sensor to monitor air pressure and plan your Levitite count for your target flight ceiling.
+</Tip>
+
+<CardGroup cols={2}>
+  <Card title="Aeronautics overview" icon="rocket" href="/aeronautics/overview">
+    All three lift systems — hot air, propellers, and Levitite — and how air pressure affects them
+  </Card>
+  <Card title="Propellers" icon="fan" href="/aeronautics/propellers">
+    Propeller Bearing and propeller tiers for adding directional thrust alongside Levitite lift
+  </Card>
+</CardGroup>

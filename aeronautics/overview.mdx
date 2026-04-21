@@ -1,0 +1,55 @@
+---
+title: "Aeronautics — Flying Contraptions and Lift Systems"
+description: "The Aeronautics module adds three lift systems — hot air, propellers, and Levitite — to build flying contraptions and airborne vehicles."
+---
+
+The Aeronautics module extends Create: Simulated with everything you need to get a physics contraption off the ground. It provides three independent lift systems — hot air balloons, propeller-driven thrust, and Levitite anti-gravity — each with distinct mechanics, cost profiles, and strengths. You can combine them freely, or use only one.
+
+<CardGroup cols={2}>
+  <Card title="Hot air" icon="flame" href="/aeronautics/hot-air">
+    Hot Air Envelope, Hot Air Burner, Steam Vent, and lifting gas types for buoyancy-based flight
+  </Card>
+  <Card title="Propellers" icon="fan" href="/aeronautics/propellers">
+    Propeller Bearing, Gyroscopic Propeller Bearing, and three propeller tiers for thrust-based flight
+  </Card>
+  <Card title="Levitite" icon="gem" href="/aeronautics/levitite">
+    Levitite and Pearlescent Levitite blocks, Levitite Blend fluid, and the crystallization process
+  </Card>
+  <Card title="Mounted Potato Cannon" icon="crosshairs" href="/aeronautics/mounted-potato-cannon">
+    A contraption-mountable projectile launcher compatible with all Potato Cannon ammunition
+  </Card>
+</CardGroup>
+
+## Three ways to fly
+
+### Hot air
+
+The hot air system provides **buoyancy lift**. You build an airtight envelope structure out of Hot Air Envelope blocks, then place a Hot Air Burner or Steam Vent below it. When the burner is powered, it fills the enclosed volume with hot air or steam. The larger the enclosed volume, the more lift it generates.
+
+Hot air is best for stable vertical flight. Lift output is configurable in real time by adjusting the burner's scroll panel or its redstone signal, so you can hover at a precise altitude by balancing lift against the contraption's weight.
+
+### Propellers
+
+The propeller system provides **directional thrust**. A Propeller Bearing spins a propeller assembly — made from Smart, Andesite, or Wooden Propeller blocks — and converts that rotation into thrust along the bearing's facing direction. Thrust scales with both RPM and the number of propeller sail-like blocks.
+
+Use propellers for horizontal travel and precise maneuvering. The Gyroscopic Propeller Bearing adds active stabilization on top of thrust, which makes it the right choice for helicopters and top-heavy structures.
+
+### Levitite
+
+Levitite is a crystalline block that generates **anti-gravity lift** when attached to a simulated contraption. Unlike hot air and propellers, Levitite is not engine-powered — you obtain it by crystallizing Levitite Blend fluid and then place the blocks on your contraption. Enough Levitite keeps the contraption afloat indefinitely, but Levitite alone cannot gain altitude; you need an additional force to ascend.
+
+## Air pressure
+
+All three lift systems are affected by **air pressure**. As your contraption climbs higher, air pressure decreases and all lift and thrust outputs weaken accordingly. A contraption naturally settles at the altitude where its total lift equals its weight. To climb higher, you increase lift; to descend, you reduce it.
+
+You can measure the current air pressure precisely using an **Altitude Sensor** from the Simulated module.
+
+<Tip>
+  Press **W** while looking at any Aeronautics block in-game to open its ponder scene for a visual walkthrough.
+</Tip>
+
+## Equipment
+
+The **Aviator's Goggles** are a head armor item that extends the functionality of Create's Engineer's Goggles with aerial readouts. They display stress impact, altitude data, and other block-specific information while you look at placed components.
+
+The **Mounted Potato Cannon** is a block version of Create's Potato Cannon designed to be placed on a contraption and fired by redstone, enabling automated ranged combat and utility from the air.

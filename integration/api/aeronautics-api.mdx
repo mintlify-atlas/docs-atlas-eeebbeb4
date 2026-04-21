@@ -1,0 +1,186 @@
+---
+title: 'Aeronautics API reference for mod developers'
+description: 'Java API classes in dev.eriksonn.aeronautics.api — custom ambient music for aerial vehicles and the Levitite blend crystallization pipeline.'
+---
+
+The Aeronautics API lives in the `dev.eriksonn.aeronautics.api` package. Add the `aeronautics` module as a `modImplementation` dependency — see the [API overview](/integration/api/overview) for Gradle setup.
+
+---
+
+## CustomSituationalMusic
+
+`dev.eriksonn.aeronautics.api.CustomSituationalMusic`
+
+A record that pairs a vanilla `Music` instance with a client-side `Condition`. When a player is aboard an aerial vehicle, Aeronautics evaluates all registered `CustomSituationalMusic` entries and plays the first one whose condition returns `true`.
+
+```java
+public record CustomSituationalMusic(Music music, Condition condition) {
+
+    @FunctionalInterface
+    public interface Condition {
+        boolean test(ClientLevel level, LocalPlayer player);
+    }
+}
+```
+
+### Registering custom music
+
+Register entries through the `AeroClientRegistries.CUSTOM_SITUATIONAL_MUSIC` Veil registry. The condition receives the current `ClientLevel` and `LocalPlayer`, so you can gate music on altitude, biome, dimension, or any other client-available state.
+
+```java
+// In your client mod initialiser
+ResourceKey<CustomSituationalMusic> myMusicKey = ResourceKey.create(
+    AeroClientRegistries.CUSTOM_SITUATIONAL_MUSIC.key(),
+    ResourceLocation.fromNamespaceAndPath("mymod", "desert_flight")
+);
+
+CustomSituationalMusic desertFlight = new CustomSituationalMusic(
+    new Music(
+        MySounds.DESERT_FLIGHT_THEME.holder(),
+        600,   // min delay between plays (ticks)
+        1200,  // max delay between plays (ticks)
+        true   // replace current music
+    ),
+    (level, player) -> {
+        // Play only when airborne above a desert biome
+        return player.getY() > 80
+            && level.getBiome(player.blockPosition())
+                    .is(Biomes.DESERT);
+    }
+);
+
+AeroClientRegistries.CUSTOM_SITUATIONAL_MUSIC
+    .asVanillaRegistry()
+    .register(myMusicKey, desertFlight);
+```
+
+<Note>
+`CustomSituationalMusic` is a client-only API. Do not reference it from server-side code.
+</Note>
+
+---
+
+## Levitite crystallization API
+
+Package: `dev.eriksonn.aeronautics.api.levitite_blend_crystallization`
+
+This package exposes the pipeline that turns liquid Levitite Blend into solid Levitite crystals. You can plug into this pipeline to define new crystal variants, custom catalyzer items, or modified propagation rules.
+
+### CrystalPropagationContext
+
+`dev.eriksonn.aeronautics.api.levitite_blend_crystallization.CrystalPropagationContext`
+
+An interface that describes how a single unit of Levitite Blend behaves when it starts crystallizing. Implement this to create a new crystal type.
+
+| Method | Description |
+|---|---|
+| `onCrystallizationInitialize(level, pos, isDormant)` | Called when the blend exits its dormant phase and begins the crystallization timer. |
+| `onCrystallize(level, pos)` | Called when crystallization succeeds. Replace the fluid with your crystal block here. The default helper `onDefaultCrystallize` handles standard block replacement and breakable-block cleanup. |
+| `onCrystallizationFail(level, pos, attempts, isDormant)` | Called when the attempt fails. Use this to reschedule or clean up. |
+| `getCrystalBlockState(level, pos)` | Return the `BlockState` to place when crystallization succeeds. |
+| `canSpreadTo(fluidState)` | Return `true` if crystallization can propagate into a neighbouring fluid. |
+| `getContextForSpread(level, pos)` | Return the `CrystalPropagationContext` to use for a neighbouring spread position. |
+| `getCatalyzerTag()` | Return the `TagKey<Block>` identifying blocks that catalyze this crystal type. |
+| `shouldCrystallize(level, attempts, isDormant)` | Override to adjust the probability of success per attempt. |
+| `getNewAge(level, attempts, isDormant)` | Override to control how long the next dormant phase lasts (ticks). |
+
+```java
+public class MyCrystalContext implements CrystalPropagationContext {
+
+    @Override
+    public void onCrystallizationInitialize(Level level, BlockPos pos, boolean isDormant) {
+        // Optional: spawn particles, play a sound
+    }
+
+    @Override
+    public void onCrystallize(Level level, BlockPos pos) {
+        // Delegate to the default logic (replaces fluid, breaks fragile neighbours)
+        onDefaultCrystallize(level, pos);
+    }
+
+    @Override
+    public void onCrystallizationFail(Level level, BlockPos pos, int attempts, boolean isDormant) {
+        // Reschedule with a longer delay on failure
+        LevititeCrystallizerManager.addTicker(
+            level, pos, 40, false, false, this
+        );
+    }
+
+    @Override
+    public BlockState getCrystalBlockState(Level level, BlockPos pos) {
+        return MyBlocks.MY_CRYSTAL.defaultBlockState();
+    }
+
+    @Override
+    public boolean canSpreadTo(FluidState state) {
+        return state.getType() == AeroFluids.LEVITITE_BLEND.get();
+    }
+
+    @Override
+    public CrystalPropagationContext getContextForSpread(Level level, BlockPos pos) {
+        return new MyCrystalContext();
+    }
+
+    @Override
+    public TagKey<Block> getCatalyzerTag() {
+        return MyTags.MY_CATALYZER_BLOCKS;
+    }
+}
+```
+
+---
+
+### LevititeCatalyzerHandler
+
+`dev.eriksonn.aeronautics.api.levitite_blend_crystallization.LevititeCatalyzerHandler`
+
+An `InteractCallback` that fires when a player right-clicks Levitite Blend fluid while holding a catalyzer item. It performs a ray-cast to find the fluid block, then sends a crystallization packet to the server.
+
+You do not typically need to subclass `LevititeCatalyzerHandler`. Instead, tag your custom catalyzer items with `AeroTags.ItemTags.LEVITITE_CATALYZER` or `AeroTags.ItemTags.LEVITITE_SOUL_CATALYZER` and the existing handler will pick them up automatically.
+
+```json
+// In your mod's data/mymod/tags/items/levitite_catalyzer.json
+{
+  "replace": false,
+  "values": [
+    "mymod:my_catalyzer_item"
+  ]
+}
+```
+
+---
+
+### LevititeCrystallizerManager
+
+`dev.eriksonn.aeronautics.api.levitite_blend_crystallization.LevititeCrystallizerManager`
+
+A static manager that tracks all active crystallization tickers per level. Use `addTicker` to schedule crystallization at a position.
+
+| Method | Description |
+|---|---|
+| `addTicker(level, pos, delay, requiresCatalyst, skipDormant, context)` | Queue a new crystallization ticker. `delay` is in ticks. Set `requiresCatalyst` to `true` if the position must have a catalyzer block nearby to proceed. |
+| `getTickedPositions(level)` | Returns all `BlockPos` values currently being processed in a level. |
+| `tick(level)` | Called each server tick to advance all tickers. You do not need to call this manually; Aeronautics handles the tick internally. |
+| `saveData(list, level)` / `loadData(tag, level)` | Serialization hooks used by `CrystallizationWorldSaveData`. |
+
+```java
+// Schedule crystallization at a position with a 20-tick delay
+LevititeCrystallizerManager.addTicker(
+    serverLevel,
+    targetPos,
+    20,     // delay ticks
+    false,  // does not require a catalyzer block
+    false,  // go through dormant phase normally
+    new MyCrystalContext()
+);
+```
+
+<Note>
+`addTicker` queues the ticker rather than adding it immediately. Tickers are applied at the start of the next tick cycle to avoid concurrent modification during iteration.
+</Note>
+
+<CardGroup cols={1}>
+  <Card title="Simulated API reference" icon="code" href="/integration/api/simulated-api">
+    Bearing slowdown, display targets, stress tooltips, and sounds.
+  </Card>
+</CardGroup>

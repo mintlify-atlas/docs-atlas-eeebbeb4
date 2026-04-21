@@ -1,0 +1,107 @@
+{
+  "projectType": "general",
+  "projectName": "Create: Simulated",
+  "projectDescription": "A suite of NeoForge Minecraft mods extending Create with physics-based contraptions, enabling players to build airships, planes, balloons, and ground vehicles.",
+  "theme": "palm",
+  "primaryColor": "#5c64f4",
+  "lightColor": "#acb4fc",
+  "darkColor": "#ffffff",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "installation",
+              "getting-started"
+            ]
+          },
+          {
+            "group": "Simulated",
+            "pages": [
+              "simulated/overview",
+              "simulated/physics-assembler",
+              "simulated/kinetics",
+              "simulated/sensors",
+              "simulated/redstone",
+              "simulated/items"
+            ]
+          },
+          {
+            "group": "Aeronautics",
+            "pages": [
+              "aeronautics/overview",
+              "aeronautics/hot-air",
+              "aeronautics/propellers",
+              "aeronautics/levitite",
+              "aeronautics/mounted-potato-cannon"
+            ]
+          },
+          {
+            "group": "Offroad",
+            "pages": [
+              "offroad/overview",
+              "offroad/wheels",
+              "offroad/borehead-bearing"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integration & API",
+        "groups": [
+          {
+            "group": "ComputerCraft",
+            "pages": [
+              "integration/computercraft/overview",
+              "integration/computercraft/peripherals"
+            ]
+          },
+          {
+            "group": "Mod API",
+            "pages": [
+              "integration/api/overview",
+              "integration/api/simulated-api",
+              "integration/api/aeronautics-api"
+            ]
+          },
+          {
+            "group": "Other Integrations",
+            "pages": [
+              "integration/jei",
+              "integration/compatibility"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Physics-based contraption assembly via the Physics Assembler block",
+    "Flying vehicles using Hot Air Burners, Propeller Bearings, and Levitite",
+    "Ground vehicles with Wheel Mounts and tire items",
+    "Swivel Bearing for rotating physics contraptions",
+    "Rope Winch and Rope Connector for tethering contraptions",
+    "Sensors: Altitude, Velocity, Optical, Laser, Gimbal, Navigation Table",
+    "Redstone automation: Accumulator, Inductor, Magnet, Throttle Lever",
+    "Borehead Bearing for drill-head excavation contraptions",
+    "ComputerCraft peripheral support for all major sensor blocks",
+    "Levitite Blend — a crystallizable anti-gravity fluid"
+  ],
+  "publicApiSurface": [
+    "dev.simulated_team.simulated.api.BearingSlowdownController",
+    "dev.simulated_team.simulated.api.ConditionalDisplayTarget",
+    "dev.simulated_team.simulated.api.CustomStressImpactTooltipProvider",
+    "dev.simulated_team.simulated.api.sound.SimSoundEntry",
+    "dev.simulated_team.simulated.api.sound.SoundDefinition",
+    "dev.simulated_team.simulated.api.sound.SoundEventRegistry",
+    "dev.eriksonn.aeronautics.api.CustomSituationalMusic",
+    "dev.eriksonn.aeronautics.api.levitite_blend_crystallization.CrystalPropagationContext",
+    "dev.eriksonn.aeronautics.api.levitite_blend_crystallization.LevititeCatalyzerHandler",
+    "dev.eriksonn.aeronautics.api.levitite_blend_crystallization.LevititeCrystallizerManager",
+    "ComputerCraft peripherals: AltitudeSensorPeripheral, GimbalSensorPeripheral, VelocitySensorPeripheral, NavTablePeripheral, DockingConnectorPeripheral, SwivelBearingPeripheral, TorsionSpringPeripheral, OpticalSensorPeripheral, LinkedTypewriterPeripheral, DirectionalLinkPeripheral, ModulatingLinkPeripheral, NamePlatePeripheral"
+  ]
+}

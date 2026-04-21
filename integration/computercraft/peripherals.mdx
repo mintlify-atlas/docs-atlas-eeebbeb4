@@ -1,0 +1,195 @@
+---
+title: 'ComputerCraft peripheral reference for Simulated'
+description: 'Every CC:Tweaked peripheral exposed by Create: Simulated, with Lua method signatures and usage examples for each supported block.'
+---
+
+Create: Simulated registers the following blocks as ComputerCraft peripherals. Attach a computer to the side of any of these blocks, then call `peripheral.wrap("side")` or `peripheral.find("type_string")` to access its methods.
+
+<AccordionGroup>
+
+  <Accordion title="Altitude Sensor — altitude_sensor">
+    Wraps the **Altitude Sensor** block. Reports the contraption's current world height and the simulated air pressure at that altitude.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getHeight()` | `float` | World Y-coordinate of the sensor. |
+    | `getAirPressure()` | `double` | Simulated air pressure at the current height. |
+
+    ```lua
+    local sensor = peripheral.find("altitude_sensor")
+    print("Y: " .. sensor.getHeight())
+    print("Pressure: " .. sensor.getAirPressure())
+    ```
+  </Accordion>
+
+  <Accordion title="Velocity Sensor — velocity_sensor">
+    Wraps the **Velocity Sensor** block. Returns the current adjusted velocity of the contraption the sensor is part of.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getVelocity()` | `float` | Current velocity of the contraption. |
+
+    ```lua
+    local sensor = peripheral.find("velocity_sensor")
+    print("Velocity: " .. sensor.getVelocity())
+    ```
+  </Accordion>
+
+  <Accordion title="Gimbal Sensor — gimbal_sensor">
+    Wraps the **Gimbal Sensor** block. Returns the X and Z tilt angles of the contraption in degrees.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getAngles()` | `{double, double}` | `{xAngle, zAngle}` in degrees. |
+
+    ```lua
+    local sensor = peripheral.find("gimbal_sensor")
+    local angles = sensor.getAngles()
+    print("Pitch (X): " .. angles[1])
+    print("Roll  (Z): " .. angles[2])
+    ```
+  </Accordion>
+
+  <Accordion title="Optical Sensor — optical_sensor">
+    Wraps the **Optical Sensor** block. Fires a laser ray and reports what it hits.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getDistance()` | `float` | Distance to the first block hit by the ray. |
+    | `getBlock()` | `string` | Registry ID of the block hit (e.g. `"minecraft:stone"`). |
+
+    ```lua
+    local sensor = peripheral.find("optical_sensor")
+    print("Hit: " .. sensor.getBlock() .. " at " .. sensor.getDistance() .. " blocks")
+    ```
+  </Accordion>
+
+  <Accordion title="Swivel Bearing — swivel_bearing">
+    Wraps the **Swivel Bearing** block. Reads the bearing's current target angle.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getTargetAngle()` | `double` | Current target angle in degrees. |
+
+    ```lua
+    local bearing = peripheral.find("swivel_bearing")
+    print("Target angle: " .. bearing.getTargetAngle() .. "°")
+    ```
+  </Accordion>
+
+  <Accordion title="Torsion Spring — torsion_spring">
+    Wraps the **Torsion Spring** block. Reads and controls the spring's angle limit.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getAngle()` | `float` | Current spring angle. |
+    | `getLimit()` | `int` | Current angle limit value. |
+    | `setLimit(limit)` | `void` | Sets the angle limit. Only takes effect when the spring is static (not running). |
+    | `isRunning()` | `boolean` | `true` if the spring is actively rotating. |
+
+    ```lua
+    local spring = peripheral.find("torsion_spring")
+
+    if not spring.isRunning() then
+        spring.setLimit(45)
+    end
+
+    print("Angle: " .. spring.getAngle())
+    ```
+  </Accordion>
+
+  <Accordion title="Nav Table — navigation_table">
+    Wraps the **Nav Table** block. Returns the vessel's heading relative to its target waypoint.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getRelativeAngle()` | `float` | Angle to the current navigation target in degrees. |
+
+    ```lua
+    local nav = peripheral.find("navigation_table")
+    print("Bearing to target: " .. nav.getRelativeAngle() .. "°")
+    ```
+  </Accordion>
+
+  <Accordion title="Directional Link — directional_link">
+    Wraps the **Directional Linked Receiver** block. Reports the bearing to the closest linked transmitter.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getClosestAngle()` | `double` | Angle to the nearest linked transmitter in degrees. |
+
+    ```lua
+    local link = peripheral.find("directional_link")
+    print("Transmitter bearing: " .. link.getClosestAngle() .. "°")
+    ```
+  </Accordion>
+
+  <Accordion title="Modulating Link — modulating_link">
+    Wraps the **Modulating Linked Receiver** block. Reports the distance to the closest linked transmitter.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getClosestDistance()` | `double` | Distance to the nearest linked transmitter in blocks. |
+
+    ```lua
+    local link = peripheral.find("modulating_link")
+    print("Distance to transmitter: " .. link.getClosestDistance())
+    ```
+  </Accordion>
+
+  <Accordion title="Docking Connector — docking_connector">
+    Wraps the **Docking Connector** block. Returns the name of the sub-level (contraption) the connector is currently docked to.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getConnectedName()` | `string` | Name of the docked contraption, or `""` if not docked. |
+
+    ```lua
+    local dock = peripheral.find("docking_connector")
+    local name = dock.getConnectedName()
+    if name ~= "" then
+        print("Docked to: " .. name)
+    else
+        print("Not docked")
+    end
+    ```
+  </Accordion>
+
+  <Accordion title="Linked Typewriter — linked_typewriter">
+    Wraps the **Linked Typewriter** block. Returns the key codes of all keys currently pressed on the typewriter.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getPressedKeyCodes()` | `{int, ...}` | List of LWJGL key codes for currently held keys. |
+
+    ```lua
+    local typewriter = peripheral.find("linked_typewriter")
+    local keys = typewriter.getPressedKeyCodes()
+    for _, code in ipairs(keys) do
+        print("Key held: " .. code)
+    end
+    ```
+  </Accordion>
+
+  <Accordion title="Name Plate — name_plate">
+    Wraps the **Name Plate** block. Reads and sets the displayed name.
+
+    | Method | Return type | Description |
+    |---|---|---|
+    | `getName()` | `string` | Current text displayed on the name plate. |
+    | `setName(name)` | `void` | Updates the displayed text. |
+
+    ```lua
+    local plate = peripheral.find("name_plate")
+    plate.setName("Airship Alpha")
+    print("Name is: " .. plate.getName())
+    ```
+  </Accordion>
+
+</AccordionGroup>
+
+<CardGroup cols={1}>
+  <Card title="ComputerCraft integration overview" icon="computer" href="/integration/computercraft/overview">
+    How to set up CC:Tweaked and wrap your first peripheral.
+  </Card>
+</CardGroup>

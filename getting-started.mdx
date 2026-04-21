@@ -1,0 +1,104 @@
+---
+title: "Build your first physics contraption in Create: Simulated"
+description: "Learn the end-to-end workflow for turning a Minecraft structure into a moving Simulated Contraption — from assembly to steering, thrust, and lift."
+---
+
+A Simulated Contraption is a physics-enabled structure that the game treats as a single rigid body. Unlike a standard Create contraption, it responds to gravity, momentum, and the forces produced by Aeronautics and Offroad components attached to it. This guide walks you through assembling a basic steerable vehicle from scratch.
+
+<Tip>
+  Start small. A contraption built from a 3×3×2 block frame with a Steering Wheel and a single thrust source is enough to understand the full workflow. Add complexity — balloon lift, propeller clusters, or sensor feedback — once you are comfortable with the basics.
+</Tip>
+
+## Before you begin
+
+- Install [Create: Simulated](/installation) with at least the **Simulated** module.
+- For a flying contraption, also install **Aeronautics**.
+- For a ground vehicle, also install **Offroad**.
+- Have basic familiarity with the [Create mod](https://modrinth.com/mod/create) (shafts, kinetic networks, and crafting with Andesite Alloy).
+
+## Build your first contraption
+
+<Steps>
+  <Step title="Craft a Physics Assembler">
+    The Physics Assembler converts a connected structure into a Simulated Contraption.     Place it on any surface adjacent to or touching the structure you want to simulate. The assembler attaches facing the block it contacts.
+
+    <Note>
+      Press **W** while looking at the Physics Assembler in-game to open its Ponder tutorial. The Ponder system walks you through every block in Create: Simulated — use it whenever you need a visual demo of how something works.
+    </Note>
+  </Step>
+
+  <Step title="Build a physical frame">
+    Construct the body of your vehicle using any solid blocks. The Physics Assembler will include every block connected — directly or diagonally — to it when it assembles. Keep these rules in mind:
+
+    - The assembled structure must not exceed the maximum block count shown in the Physics Assembler's UI.
+    - Leave space on the structure for control blocks and thrust sources before assembling.
+    - Blocks flagged as **brittle** in Create (glass, scaffolding) can still be included but may detach on impact.
+  </Step>
+
+  <Step title="Add a Steering Wheel">
+    Place a **Steering Wheel** on your frame and connect it to a kinetic network using a shaft. The Steering Wheel both steers the contraption and acts as a small rotational generator (16 su capacity at a fixed RPM). You sit in the Steering Wheel the same way you ride a horse — right-click it to mount.
+
+    Connect the shaft output to any blocks on the contraption that need rotational power, such as Propeller Bearings or Wheel Mounts.
+  </Step>
+
+  <Step title="Add a Throttle Lever">
+    Place a **Throttle Lever** near the Steering Wheel. Sneak and right-click to set the throttle range. The Throttle Lever outputs a variable redstone signal (0–15) that your thrust blocks read to determine how much force to apply. Wire the lever's redstone output to your thrust source using vanilla redstone dust or any Create signal carrier.
+  </Step>
+
+  <Step title="Add lift or thrust">
+    Attach a thrust or lift source to the frame, depending on the type of vehicle:
+
+    **Flying contraption (Aeronautics required)**
+    - Place **Hot Air Burners** on the underside of the frame and connect fabric (sail blocks) above them to form a balloon envelope. The burners consume fuel from an inventory and push the contraption upward.
+    - Attach **Propeller Bearings** to the frame and connect them to the Steering Wheel's kinetic shaft for directional thrust.
+    - Fill a pocket of your frame with **Levitite fluid** using a fluid pipe for passive anti-gravity lift that does not require fuel.
+
+    **Ground vehicle (Offroad required)**
+    - Place **Wheel Mounts** on the underside of the frame and fit **tires** to them. Connect the axle shafts to the Steering Wheel's output to drive the wheels.
+    - Add a **Borehead Bearing** at the front to drill through terrain as the vehicle moves.
+  </Step>
+
+  <Step title="Assemble the contraption">
+    Hold right-click on the Physics Assembler and drag downward to pull its lever. The structure detaches from the world and becomes a live Simulated Contraption governed by physics.
+
+    <Warning>
+      Assembly is active as long as the contraption is running. To disassemble, hold right-click on the Physics Assembler again and pull the lever — this returns all blocks to the world at their original positions. The contraption must be close to rest to disassemble successfully.
+    </Warning>
+  </Step>
+
+  <Step title="Take control">
+    Right-click the Steering Wheel to mount the contraption. Use the following default inputs while seated:
+
+    - **A / D** — steer left or right
+    - **W / S** — pitch forward or backward (flying contraptions)
+    - **Space** — ascend (if lift is available)
+    - **Shift** — descend or dismount
+
+    Adjust the Throttle Lever before mounting to set your cruising power level. The contraption will move as soon as thrust exceeds the forces opposing it.
+  </Step>
+</Steps>
+
+## Using the in-game Ponder system
+
+Every block in Create: Simulated has a built-in animated tutorial accessible through the **Ponder** system. To open a Ponder scene, hold **W** while hovering over any Create: Simulated item in your inventory or in a block's tooltip. Ponder scenes show you exactly how each block behaves in context — including wiring, placement, and interaction with other blocks.
+
+<Tip>
+  Use Ponder before reading detailed block pages. A 30-second animation often explains a block's purpose faster than a written description, and the scenes are always up to date with the current version.
+</Tip>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Simulated module" icon="atom" href="/simulated/overview">
+    Explore every core block: Physics Assembler, sensors, Swivel Bearing, and redstone components
+  </Card>
+  <Card title="Aeronautics module" icon="wind" href="/aeronautics/overview">
+    Learn how hot air, propellers, and Levitite generate lift and thrust
+  </Card>
+  <Card title="Offroad module" icon="truck-monster" href="/offroad/overview">
+    Build ground vehicles with Wheel Mounts, tires, and the Borehead Bearing
+  </Card>
+  <Card title="ComputerCraft integration" icon="code" href="/integration/computercraft/overview">
+    Automate your contraption's sensors and controls with Lua scripts
+  </Card>
+</CardGroup>

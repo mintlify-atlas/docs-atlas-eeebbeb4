@@ -1,0 +1,76 @@
+---
+title: "Physics Assembler — Assembling Simulated Contraptions"
+description: "The Physics Assembler converts a glued group of blocks into a physics-simulated contraption. Learn how to craft, assemble, and disassemble one."
+---
+
+The Physics Assembler is the heart of every Simulated Contraption. You place it on any surface adjacent to a structure, select the blocks you want to assemble using Super Glue or Honey Glue, then pull the lever to launch the entire group into physics simulation.
+
+## Crafting
+
+The Physics Assembler is crafted from Andesite Alloy, a Lever, and an Andesite Casing. Look up the exact shaped recipe in JEI (press **R** on the item) or in the in-game guide.
+
+## Assembling a contraption
+
+<Steps>
+  <Step title="Build your structure">
+    Construct the blocks you want to simulate. The structure can be any shape. Diagonal connections are included when the assembler scans for glued groups.
+  </Step>
+  <Step title="Glue the blocks together">
+    Right-click adjacent block faces with **Super Glue** (Create's default) or **Honey Glue** (the Simulated alternative) to select the group. Every block that needs to move together must share at least one glue connection with the rest of the group.
+  </Step>
+  <Step title="Place the Physics Assembler">
+    Place the Physics Assembler on any solid surface — floor, wall, or ceiling — touching or adjacent to a block in your glued structure. The assembler attaches in the direction it is placed.
+  </Step>
+  <Step title="Assemble">
+    Hold right-click on the Physics Assembler and drag to pull the lever. The assembled contraption detaches from the world and begins simulating physics.
+  </Step>
+</Steps>
+
+<Note>
+  The Physics Assembler that triggered the assembly becomes the **primary assembler** for that contraption. It stays in place and is needed to disassemble. Any Physics Assembler can disassemble a contraption, but the primary one is tracked per-contraption.
+</Note>
+
+## Disassembling a contraption
+
+To stop a contraption and return it to placed blocks:
+
+1. Place a Physics Assembler on a nearby surface while the contraption is at rest (or close enough to rest).
+2. Hold right-click on the Physics Assembler and drag to pull the lever.
+
+The contraption realigns to the nearest valid block grid position and snaps back into the world. Disassembly fails if the contraption is moving too fast, is out of the world, or cannot align to valid positions. The error message in chat tells you why.
+
+<Warning>
+  You cannot disassemble while the contraption is moving quickly. Slow it down first, or use a Rope Winch to bring it to a halt before disassembling.
+</Warning>
+
+## Block properties
+
+Not every block behaves the same way in a Simulated Contraption. Blocks carry physical properties:
+
+| Property | Description |
+|---|---|
+| **Mass** | How heavy the block is — affects momentum and force calculations |
+| **Friction** | How much the block grips other surfaces |
+| **Bounciness** | How elastically the block rebounds on impact |
+
+Certain blocks are tagged **light** or **super heavy**, making them significantly lighter or heavier than their default mass. Slime and honey-type blocks are tagged **slippery**, while glass and similar fragile blocks behave **fragile**.
+
+You can preview a block's properties in its item tooltip. When wearing Engineer's Goggles, the tooltip is always visible. Without goggles, hold Shift (or configure the tooltip behavior in Create's settings).
+
+## The `#simulated:non_movable` tag
+
+Blocks tagged `#simulated:non_movable` cannot be included in a Simulated Contraption. When the assembler scans the glued group, any block with this tag is silently excluded from the assembly. This prevents world-breaking or undefined behavior for blocks that are not designed to move.
+
+If a block you expect to see in your contraption disappears after assembly, check whether it carries this tag. Common candidates include tile entities that manage world-scoped state.
+
+## Structure size and complexity
+
+The assembler does not impose a hard block count limit, but very large contraptions increase simulation cost. Keep the following in mind:
+
+- Contraptions with more blocks are more expensive to simulate each tick.
+- Disconnected sub-sections of a contraption split off into separate smaller contraptions automatically. Use a Slime Ball to merge two contraptions back together.
+- Complex internal kinetic networks (many cogwheels, many stress consumers) run their logic every tick even while moving.
+
+<Tip>
+  Press **W** while looking at the Physics Assembler in-game to open its ponder scenes. Four storyboards cover basic assembly, interacting with contraptions, block properties, and sub-level splitting.
+</Tip>

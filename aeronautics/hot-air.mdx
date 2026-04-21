@@ -1,0 +1,112 @@
+---
+title: "Hot Air — Envelopes, Burners, and Steam Vents"
+description: "Build buoyancy-lift contraptions using Hot Air Envelopes, the Hot Air Burner, and the Steam Vent. Lift scales with enclosed volume and gas type."
+---
+
+The hot air system generates lift by filling an enclosed volume of Hot Air Envelope blocks with gas. The larger the enclosed volume and the stronger the gas, the more lift is produced. Lift output decreases as altitude increases due to air pressure.
+
+## Hot Air Envelope
+
+Hot Air Envelope blocks are the structural material for balloons. They form the walls, floor, and ceiling of the gas-filled volume that provides buoyancy.
+
+| Property | Value |
+|---|---|
+| Colors | 16 dye colors |
+| Material | Wool and Stick |
+| Airtight | Yes |
+| Shaft-compatible form | Envelope Encased Shaft |
+
+Envelope blocks enclose a volume when arranged into an airtight chamber. The enclosed interior volume determines how much lift the balloon can generate — blocks placed inside the chamber reduce the available volume.
+
+You can craft any colored envelope using the dye-colored wool of that color and Sticks. Right-click an already-placed envelope block with dye to repaint it without breaking it.
+
+**Envelope Encased Shafts** let you route shafts through the balloon wall without breaking airtightness. They behave mechanically like an Andesite Casing–wrapped shaft but use the envelope material as their casing.
+
+<Tip>
+  Press **W** on any Envelope block to open the ponder scene showing how to construct a balloon, fill it with hot air, and work with Envelope Encased Shafts.
+</Tip>
+
+## Hot Air Burner
+
+The Hot Air Burner generates lift by filling the balloon directly above it with hot air. It is the primary lift source for hot air balloons.
+
+| Property | Value |
+|---|---|
+| Material | Iron Sheets, Andesite Alloy, Redstone |
+| Activation | Redstone signal |
+| Output control | Scroll panel (max hot air output) |
+| Fire variant | Normal fire or soul fire |
+
+When you apply a redstone signal to the Hot Air Burner, it gradually fills the balloon above it with hot air. The burner's scroll panel sets the maximum output level; a redstone analog signal then scales the actual output proportionally between zero and that maximum.
+
+Multiple Hot Air Burners can feed into the same balloon simultaneously to increase fill speed or share the lift load.
+
+To change the flame type, right-click the burner with a Soul Sand or Soul Soil block (for soul fire) or any standard fire source item (to return to normal fire). Soul fire is purely cosmetic.
+
+<Warning>
+  The Hot Air Burner deals fire damage to entities that touch it while powered. Plan your contraption layout so passengers cannot fall onto the burner.
+</Warning>
+
+<Tip>
+  Press **W** on the Hot Air Burner to open its ponder scene covering redstone control, output adjustment, combining multiple burners, and changing the fire type.
+</Tip>
+
+### How the burner affects altitude
+
+Hot Air Burners are affected by air pressure. As your contraption climbs, lift output decreases. The contraption settles at the altitude where lift equals weight. To climb, increase the burner's output; to descend, reduce it. The precise air pressure at any altitude can be read from an Altitude Sensor.
+
+## Steam Vent
+
+The Steam Vent generates lift using steam instead of hot air. It requires heat, water, and boiler space — the same requirements as Create's Steam Engine — and provides directional thrust from the vent face.
+
+| Property | Value |
+|---|---|
+| Material | Gold Sheet, Copper Block |
+| Activation | Redstone signal |
+| Output control | Scroll panel (max steam output) |
+| Gas type | Steam |
+| Metal skin | Changeable with Iron Sheet |
+
+Place the Steam Vent at the base of an airtight envelope structure. When powered by redstone, it fills the balloon above it with steam. The scroll panel sets the maximum output; a redstone analog signal scales it proportionally.
+
+Multiple Steam Vents can share a single balloon. Each vent consumes boiler capacity, so ensure your heat source is powerful enough to run all of them at full capacity.
+
+To change the metal appearance of the vent, right-click it with an Iron Sheet.
+
+<Note>
+  Steam provides different lift strength than hot air. The exact values are determined by server configuration. Both gas types fill and empty at the same rate by default.
+</Note>
+
+<Tip>
+  Press **W** on the Steam Vent to open its ponder scene showing boiler requirements, output control, combining multiple vents, and the metal skin swap.
+</Tip>
+
+## Building a hot air balloon
+
+<Steps>
+  <Step title="Build the envelope">
+    Place Hot Air Envelope blocks in a closed, airtight shape above where the burner will sit. Any block inside the enclosure reduces the usable volume, so keep the interior hollow. Use Envelope Encased Shafts wherever a shaft needs to pass through the wall.
+  </Step>
+  <Step title="Place the burner">
+    Put the Hot Air Burner directly below the bottom of the envelope structure, facing upward into the enclosed space. The burner must have a clear path into the interior.
+  </Step>
+  <Step title="Connect redstone">
+    Run a redstone line to the Hot Air Burner. A lever, Throttle Lever, or Altitude Sensor–driven circuit all work. Set the scroll panel to the desired maximum output.
+  </Step>
+  <Step title="Assemble the contraption">
+    Use the Physics Assembler to assemble the entire structure — envelope, burner, and any payload — into a simulated contraption.
+  </Step>
+  <Step title="Power the burner">
+    Apply a redstone signal to the burner. Hot air will gradually fill the envelope. Once lift exceeds the contraption's weight, it will rise.
+  </Step>
+  <Step title="Adjust altitude">
+    Increase the burner output to climb or reduce it to descend. The contraption settles naturally at the altitude where lift and weight are balanced. An Altitude Sensor lets you automate this with a redstone feedback loop.
+  </Step>
+</Steps>
+
+## Lifting gas comparison
+
+| Gas type | Source | Lift strength | Notes |
+|---|---|---|---|
+| Hot air | Hot Air Burner | Config-defined | Default gas; straightforward to set up |
+| Steam | Steam Vent | Config-defined | Requires heat, water, and boiler capacity |

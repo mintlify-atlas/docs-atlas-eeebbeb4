@@ -1,0 +1,109 @@
+---
+title: "Propellers — Thrust Bearings and Propeller Blades"
+description: "Use Propeller Bearings and propeller blades to generate directional thrust. Thrust scales with RPM and propeller size. Gyroscopic bearings add stabilization."
+---
+
+The propeller system converts rotational force into thrust. A Propeller Bearing or Gyroscopic Propeller Bearing drives an attached propeller assembly and pushes the contraption in its facing direction. Thrust scales with both RPM and the size of the propeller. Like all lift and thrust systems in Aeronautics, output weakens as altitude increases.
+
+## Propeller Bearing
+
+The Propeller Bearing is the standard thrust source. It attaches to a propeller assembly — any structure with at least two valid sail-like propeller blocks — and generates thrust proportional to its RPM and the number of propeller blades.
+
+| Property | Value |
+|---|---|
+| Stress impact | 2 SU |
+| Material | Wooden Slab, Brass Casing, Iron Sheet |
+| Activation | Rotational force from any source |
+| Thrust direction | Configurable with Wrench |
+
+Place the Propeller Bearing facing the direction you want it to push the contraption, then attach a propeller assembly to the block in front of it. The bearing converts incoming rotation into a thrust force along its facing axis.
+
+- **Clockwise rotation** pushes air in the default direction; **counterclockwise rotation** reverses thrust.
+- Right-click the bearing with a Wrench to invert the default thrust direction without changing the rotation source.
+- Inspect the bearing with Engineer's Goggles or Aviator's Goggles to read current thrust output and airflow.
+
+<Note>
+  If the contraption is already moving in the thrust direction, airflow across the propeller reduces the effective thrust. Thrust output decreases as the contraption's speed through the air increases.
+</Note>
+
+<Tip>
+  Press **W** on the Propeller Bearing to open ponder scenes covering thrust generation, reversing direction, Engineer's Goggles readout, and the effect of air pressure on output.
+</Tip>
+
+## Gyroscopic Propeller Bearing
+
+The Gyroscopic Propeller Bearing generates thrust and actively stabilizes the contraption's orientation. Use it when the contraption would otherwise tip — for example, a helicopter where the main rotor is directly above the center of mass.
+
+| Property | Value |
+|---|---|
+| Stress impact | 2 SU |
+| Material | Wooden Slab, Brass Casing, Gyro Mechanism |
+| Stabilization | Attempts to keep propeller facing upright |
+| Redstone input | Resets tilt to zero |
+
+The Gyroscopic Propeller Bearing continuously tries to hold the contraption level. When the bearing faces downward — as in an island floated from below — it stabilizes top-heavy structures that a standard Propeller Bearing would let tumble.
+
+A redstone signal applied to the Gyroscopic Propeller Bearing resets the current tilt to zero. Use this when you want the contraption to accept a new level orientation rather than fight to return to the original one.
+
+<Tip>
+  Press **W** on the Gyroscopic Propeller Bearing to open three ponder scenes: stabilizing a helicopter, stabilizing an island with downward-facing bearings, and using redstone to reset tilt.
+</Tip>
+
+## Propeller blades
+
+Three propeller block types are available at different cost and efficiency levels. All three count as valid sail-like blocks for calculating propeller size.
+
+| Block | Stress impact | Material | Notes |
+|---|---|---|---|
+| Smart Propeller | 4 SU | Create Propeller item, Gyro Mechanism, Brass Casing | Redstone-controllable thrust direction; pitches to face upward |
+| Andesite Propeller | 4 SU | Create Propeller item, Wooden Slab, Shaft | Mid-tier; straightforward to craft |
+| Wooden Propeller | 4 SU | Crafted from Andesite Propeller | Cheapest option; same stress impact |
+
+### Smart Propeller
+
+The Smart Propeller generates thrust and actively pitches along one axis to attempt to face upward. It also lets you reverse the thrust direction by right-clicking it with a Wrench, giving you independent control over each propeller blade without changing the rotation source.
+
+Craft it from a Create **Propeller** item, a **Gyro Mechanism**, and a **Brass Casing** (yields 2).
+
+### Andesite Propeller
+
+The Andesite Propeller is a simpler mid-tier blade with no active pitch control. Right-click it with a Wrench to reverse its individual thrust direction.
+
+Craft it from a Create **Propeller** item, a **Wooden Slab**, and a **Shaft**. You can also convert it shapeless from a Wooden Propeller.
+
+### Wooden Propeller
+
+The Wooden Propeller is the cheapest available propeller blade. Its thrust output is equivalent to the Andesite Propeller, but it requires no metal to craft. Convert it to an Andesite Propeller with a shapeless recipe when you have the materials.
+
+## Building a propeller-driven aircraft
+
+<Steps>
+  <Step title="Choose a bearing type">
+    Use a **Propeller Bearing** for fixed-thrust applications such as horizontal flight. Use a **Gyroscopic Propeller Bearing** for helicopter lift or any setup where the contraption needs active leveling.
+  </Step>
+  <Step title="Place the bearing">
+    Place the bearing on your contraption facing the direction you want it to push. For a helicopter, face it upward. For forward flight, face it toward the rear of the vehicle.
+  </Step>
+  <Step title="Attach propeller blades">
+    Place at least two propeller blocks on the block directly in front of the bearing. More propeller blades in the assembly increase thrust efficiency. Any valid sail-like structure attached to that front block counts.
+  </Step>
+  <Step title="Supply rotational force">
+    Connect any Create rotational source — Portable Engine, Water Wheel, or other — to the Propeller Bearing's shaft input. Higher RPM produces more thrust.
+  </Step>
+  <Step title="Assemble the contraption">
+    Use the Physics Assembler to assemble the structure. The bearing and its propeller assembly become part of the moving contraption.
+  </Step>
+  <Step title="Control speed and direction">
+    Change RPM with a Directional Gearshift or Throttle Lever. Reverse thrust by reversing rotation direction or by wrenching the bearing or individual Smart Propeller blades.
+  </Step>
+</Steps>
+
+## Thrust and propeller size
+
+Propeller Bearings report their current **thrust** and **airflow** values. Thrust is the net force pushing the contraption; airflow is the speed of air passing through the propeller. When the contraption moves in the thrust direction, airflow increases and thrust decreases — the faster you go, the less additional push you can get.
+
+A larger propeller assembly — more sail-like blocks — is more efficient at converting RPM into thrust. Two propeller blades produce less thrust per RPM than eight, so add more blades if you need to move a heavy contraption.
+
+## Air pressure and altitude
+
+All propeller blocks are affected by air pressure. As altitude increases, thrust output decreases. The contraption cannot climb indefinitely under propeller power alone without increasing RPM or propeller size to compensate. Read the exact air pressure at any altitude using an Altitude Sensor.

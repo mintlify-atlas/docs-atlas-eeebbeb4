@@ -1,0 +1,101 @@
+---
+title: "Items — Utility Items for Physics Contraptions"
+description: "Simulated module items include the Spring, Rope Coupling, Honey Glue, Merging Glue, Contraption Diagram, Plunger Launcher, and Creative Physics Staff."
+---
+
+The Simulated module adds several utility items that support assembly, tethering, merging, inspection, and creative-mode manipulation of physics contraptions.
+
+## Spring
+
+The Spring connects two blocks with a spring force. The spring pushes the connected blocks apart when compressed and pulls them together when stretched, within configurable length limits.
+
+- Right-click a block face to set one end of the spring, then right-click a second face to complete the connection.
+- Right-click with a **Wrench** to adjust the spring's strength.
+- Right-click another block face **with a Spring** to increase the resting length.
+- Right-click while **Shift**-clicking with a Spring to decrease the resting length.
+
+The Spring item is also a crafting ingredient for the Torsion Spring block.
+
+**Recipe:** Iron Sheet (top) + Iron Nugget (middle) + Iron Sheet (bottom) → 2 Springs
+
+The Spring also exists as a **block** form — a placed spring occupies one block and connects to an adjacent block automatically. The block form drops the Spring item when broken.
+
+<Tip>
+  Press **W** on a placed Spring block to see its ponder scene (shared with the Spring item) covering length adjustment and strength configuration.
+</Tip>
+
+## Rope Coupling
+
+The Rope Coupling is the item you use to connect a Rope Winch to a Rope Connector. Right-click a Winch or Connector with the Rope Coupling to attach one end of the rope, then right-click the paired block to complete the connection.
+
+- Use Shears on the rope to remove it.
+- Right-click while holding a Wrench to slide down a rope.
+
+**Recipe:** String (cross pattern) + Iron Nuggets (corners) → 1 Rope Coupling
+
+## Honey Glue
+
+Honey Glue is a convenient alternative to Super Glue for selecting blocks to include in a Simulated Contraption.
+
+- Right-click a block face to set one endpoint of the glued area.
+- Right-click a second block face to complete the selection, creating a rectangular glued region between the two points.
+- Ctrl-scroll to expand or retract the glued area along the selection axis.
+- Hold **Alt** while right-clicking to place an endpoint in mid-air rather than on a block face.
+
+Unlike Super Glue, Honey Glue does not attach to regular Create contraptions in motion. It exclusively attaches to Simulated Contraptions. When a Super Glue connection and a Honey Glue connection overlap during assembly, Honey Glue attaches to Super Glue but Super Glue does not attach to Honey Glue — use Honey Glue in complex builds to avoid unintended connections.
+
+Honey Glue has **100 durability** and is not stackable.
+
+<Tip>
+  Press **W** on the Honey Glue item to open two ponder scenes: one for basic usage and one for its interaction with Super Glue in complex contraptions.
+</Tip>
+
+## Merging Glue
+
+**Merging Glue** exists as both a block and an item form. Use it to permanently merge two separate Simulated Contraptions into one.
+
+- Place the Merging Glue block on a face of one contraption facing toward a face of another contraption.
+- The two contraptions merge into a single physics object.
+
+Constraints on placement:
+- Both endpoints must be on different Simulated Contraptions.
+- The target face must have enough structural support.
+- The two blocks cannot be at the same position and must have valid facing directions.
+
+A Slime Ball also merges two Simulated Contraptions — right-click a contraption with a Slime Ball to merge it with the one you are holding.
+
+## Contraption Diagram
+
+The Contraption Diagram is an information tool that visualizes the forces acting on a Simulated Contraption.
+
+- Right-click the Diagram on a Simulated Contraption to bind it to that contraption.
+- While on the contraption, right-click to inspect it: the diagram displays the contraption's total mass, center of mass, and force arrows showing each active force and its magnitude.
+- Force arrows can be set to **merged** (combined per force type) or **separate** (one arrow per force source) using the configure button.
+- The Diagram must be physically located on the contraption to be inspected — you cannot inspect it while holding it off the contraption.
+
+**Recipe:** Paper + Physics Assembler → 1 Contraption Diagram
+
+## Plunger Launcher
+
+The Plunger Launcher fires a rope-attached plunger. Two launched plungers from the same launcher will connect and pull their attached surfaces together, letting you manipulate Simulated Contraptions by suction.
+
+- Right-click to fire a plunger. The plunger sticks to the first surface it hits.
+- Shift right-click to remove all currently launched plungers.
+- While wearing a **Backtank**, the launcher draws from air pressure instead of consuming durability.
+
+The launcher has **200 durability**.
+
+**Recipe:** Check JEI for the crafting recipe.
+
+## Creative Physics Staff
+
+The Creative Physics Staff is an epic-rarity creative-mode tool for directly manipulating Simulated Contraptions.
+
+| Action | Effect |
+|---|---|
+| Left-click on contraption | Locks the contraption in place |
+| Right-click on contraption | Toggles dragging the contraption |
+| Hold Tab while dragging | Switches to rotation mode — move the mouse to rotate |
+| Scroll while dragging | Adjusts the drag distance |
+
+The staff is stackable to 1 and cannot be crafted. Obtain it from the creative inventory.

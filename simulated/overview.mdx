@@ -1,0 +1,64 @@
+---
+title: "Simulated Module — Physics Assembly and Control Blocks"
+description: "The Simulated module is the core of Create: Simulated. It provides the Physics Assembler, kinetics, sensors, redstone automation, and utility items."
+---
+
+The Simulated module is the foundation of Create: Simulated. It introduces the Physics Assembler — the block you use to convert any glued structure into a freely-moving, physics-simulated contraption — alongside a full set of kinetic control blocks, environmental sensors, redstone automation components, and utility items.
+
+<CardGroup cols={2}>
+  <Card title="Physics Assembler" icon="hammer" href="/simulated/physics-assembler">
+    Assemble and disassemble physics contraptions, understand block properties and the non-movable tag
+  </Card>
+  <Card title="Kinetics" icon="gear" href="/simulated/kinetics">
+    Portable Engine, Directional Gearshift, Steering Wheel, Torsion Spring, Swivel Bearing, Rope Winch, and more
+  </Card>
+  <Card title="Sensors" icon="radar" href="/simulated/sensors">
+    Altitude, Velocity, Optical, Laser, Gimbal, and Navigation Table sensors for redstone and ComputerCraft
+  </Card>
+  <Card title="Redstone" icon="circle-dot" href="/simulated/redstone">
+    Redstone Accumulator, Inductor, Magnet, Docking Connector, linked receivers, and the Linked Typewriter
+  </Card>
+  <Card title="Items" icon="backpack" href="/simulated/items">
+    Spring, Rope Coupling, Honey Glue, Merging Glue, Contraption Diagram, Plunger Launcher, and the Creative Physics Staff
+  </Card>
+</CardGroup>
+
+## What the Simulated module provides
+
+### Physics assembly
+
+The **Physics Assembler** is the central block of the entire mod. You attach it to any group of blocks held together with Super Glue or Honey Glue, hold right-click, and pull the lever to launch them as a fully physics-simulated contraption. The contraption obeys gravity, collides with terrain, and remains fully interactable — you can open chests, flip levers, and ride it.
+
+### Kinetics and control
+
+Simulated contraptions need power and steering. The Simulated module provides:
+
+- **Portable Engine** — a self-contained fuel-burning stress source in 16 dye colors that replaces Create's network-dependent generators on a moving contraption.
+- **Swivel Bearing** — assembles a group of blocks as a sub-contraption that can rotate relative to the parent, similar to a Mechanical Bearing but for physics objects.
+- **Steering Wheel and Throttle Lever** — player-operated inputs that drive Portable Engine output and bearing angles.
+- **Directional Gearshift and Analog Transmission** — redstone-controlled kinetic routing blocks.
+- **Rope Winch and Rope Connector** — tether one contraption to another or to the world, and reel rope in or out with rotational force.
+- **Torsion Spring, Auger Shaft, Auger Cogwheel** — specialized kinetics for spring-return motion and item extraction from harvesting actors.
+
+### Sensors
+
+Six sensor blocks report environmental data as a redstone signal, and each exposes a ComputerCraft peripheral for Lua-based automation:
+
+- **Altitude Sensor** — proportional signal based on Y-level and air pressure.
+- **Velocity Sensor** — proportional signal based on contraption speed along a configurable axis.
+- **Optical Sensor** — detects blocks in its line of sight and reports distance.
+- **Laser Pointer + Laser Sensor** — beam-based sensing pair; the sensor emits a signal when the beam is unobstructed.
+- **Gimbal Sensor** — emits a signal proportional to the contraption's tilt on the X and Z axes.
+- **Navigation Table** — outputs a directional redstone signal toward a target set by a lodestone compass or other navigation item.
+
+### Redstone automation
+
+Blocks such as the **Redstone Accumulator**, **Redstone Inductor**, **Docking Connector**, **Modulating Linked Receiver**, and **Linked Typewriter** give you fine-grained control over signals across moving contraptions and wireless links.
+
+### Items
+
+Utility items — **Spring**, **Rope Coupling**, **Honey Glue**, **Merging Glue**, **Contraption Diagram**, **Plunger Launcher**, and the creative-mode **Creative Physics Staff** — support assembly, tethering, merging contraptions, and debugging.
+
+<Tip>
+  Press **W** while looking at any Simulated block in-game to open its ponder scene for a visual walkthrough of how it works.
+</Tip>

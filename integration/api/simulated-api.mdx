@@ -1,0 +1,203 @@
+---
+title: 'Simulated API reference for mod developers'
+description: 'Java API classes in dev.simulated_team.simulated.api — bearing slowdown, display targets, stress tooltips, and the sound registration system.'
+---
+
+The Simulated API lives in the `dev.simulated_team.simulated.api` package. All classes described here are stable, public-facing extension points. Import the `simulated` module as a `modImplementation` dependency — see the [API overview](/integration/api/overview) for Gradle setup.
+
+---
+
+## BearingSlowdownController
+
+`dev.simulated_team.simulated.api.BearingSlowdownController`
+
+Handles the smooth deceleration animation when a bearing contraption disassembles. The controller calculates a curved slowdown path that snaps to the nearest symmetry-aligned stopping angle.
+
+### Key constants
+
+| Constant | Value | Description |
+|---|---|---|
+| `TIMER_SCALE` | `3.5f` | Scales the total slowdown window. |
+| `SMOOTHING_FACTOR` | `2.5f` | Controls the easing curve steepness. |
+
+### Key methods
+
+| Method | Description |
+|---|---|
+| `generate(maxTime, initialAngle, initialVelocity, facingDirection, contraption)` | Initialises the controller for a contraption. `maxTime` is capped at 30 ticks. The controller derives symmetry automatically from the contraption's block layout. |
+| `generate(maxTime, initialAngle, initialVelocity, symmetry)` | Initialises with an explicit `ContraptionSymmetry` (`NONE`, `HALF`, or `QUARTER`). |
+| `getAngle(partialTick)` | Returns the interpolated bearing angle at the given partial tick. |
+| `getSpeed(partialTick)` | Returns the current angular speed at the given partial tick. |
+| `stepGoal()` | Advances the countdown by one tick. Returns `true` when the controller reaches its stopping angle. |
+| `getCountdown()` | Remaining ticks until the controller finishes. |
+| `serializeIntoNBT(tag)` / `deserializeFromNBT(tag)` | Persist and restore controller state across chunk saves. |
+
+### Example
+
+```java
+BearingSlowdownController controller = new BearingSlowdownController();
+
+// Generate from a live contraption
+controller.generate(
+    20f,                    // max slowdown duration (ticks)
+    bearing.getAngle(),     // current angle
+    bearing.getSpeed(),     // current speed
+    Direction.UP,           // bearing axis
+    contraption
+);
+
+// In your bearing tick method
+boolean done = controller.stepGoal();
+float currentAngle = controller.getAngle(partialTick);
+```
+
+---
+
+## ConditionalDisplayTarget
+
+`dev.simulated_team.simulated.api.ConditionalDisplayTarget`
+
+Extends Create's `DisplayTarget` to add a write-permission gate. Implement this abstract class to create a Create display target that only accepts data under certain conditions.
+
+### Methods to implement
+
+| Method | Description |
+|---|---|
+| `boolean allowsWriting(DisplayLinkContext context)` | Return `true` to permit the display link to write to this target. |
+| `Component getErrorMessage(DisplayLinkContext context)` | Return the message shown to players when writing is blocked. |
+
+### Example
+
+```java
+public class MyConditionalTarget extends ConditionalDisplayTarget {
+
+    @Override
+    public boolean allowsWriting(DisplayLinkContext context) {
+        // Only allow writes when the contraption is airborne
+        return context.getLevel().getBlockState(context.getPos())
+                      .getValue(MY_AIRBORNE_PROPERTY);
+    }
+
+    @Override
+    public Component getErrorMessage(DisplayLinkContext context) {
+        return Component.translatable("mymod.display.not_airborne");
+    }
+}
+```
+
+Register your target the same way as any other Create `DisplayTarget`.
+
+---
+
+## CustomStressImpactTooltipProvider
+
+`dev.simulated_team.simulated.api.CustomStressImpactTooltipProvider`
+
+Implement this interface on a block entity or item to override the default Create stress-impact tooltip with a custom label and bar visualisation.
+
+### Methods to implement
+
+| Method | Return type | Description |
+|---|---|
+| `getCustomImpactLang()` | `LangBuilder` | The translated label shown next to the stress value, e.g. `"2 × RPM × Sail count"`. |
+| `getBarLength()` | `int` | Total number of bar segments to render in the tooltip. |
+| `getFilledBarLength()` | `int` | Number of filled bar segments (represents current load). |
+
+### Example
+
+```java
+public class MySailBlockEntity extends SmartBlockEntity
+        implements CustomStressImpactTooltipProvider {
+
+    @Override
+    public LangBuilder getCustomImpactLang() {
+        return Lang.translate("mymod.tooltip.sail_stress")
+                   .add(Lang.number(getSailCount()));
+    }
+
+    @Override
+    public int getBarLength() {
+        return 10;
+    }
+
+    @Override
+    public int getFilledBarLength() {
+        return Math.min(getSailCount(), 10);
+    }
+}
+```
+
+---
+
+## Sound API
+
+Package: `dev.simulated_team.simulated.api.sound`
+
+A data-driven sound registration system for adding custom sounds to Simulated contraptions. It generates a `sounds.json` at data-gen time and provides typed `SimSoundEntry` handles for playback.
+
+### Classes
+
+| Class | Purpose |
+|---|---|
+| `SoundEventRegistry` | Create and register sound events for your mod. |
+| `SimSoundEntry` | A typed handle wrapping a registered `SoundEvent`. Use it for playback calls. |
+| `SoundDefinition` | The data model written to `sounds.json`. Created via `DefinitionBuilder`. |
+| `SoundFile` | A single audio file entry within a `SoundDefinition`. |
+| `SoundsProvider` | A `DataProvider` that writes `sounds.json` during data generation. |
+
+### Registering sounds
+
+```java
+// In your mod's sound registration class
+public class MySounds {
+
+    public static final SoundEventRegistry REGISTRY =
+            new SoundEventRegistry("mymod");
+
+    public static final SimSoundEntry ENGINE_HUM = REGISTRY.create(
+        "engine_hum",
+        SoundSource.BLOCKS,
+        def -> def
+            .subtitle("Engine humming")
+            .addFileVariants("mymod:engine_hum", 3)  // engine_hum_1, _2, _3
+    );
+
+    public static final SimSoundEntry TURBINE_LOOP = REGISTRY.create(
+        "turbine_loop",
+        def -> def
+            .subtitle("Turbine loop")
+            .addFileVariant("mymod:turbine_loop", b -> b.setStream(true))
+    );
+}
+```
+
+### Adding the data provider
+
+```java
+// In your data generation event handler
+@Override
+public void onGatherData(GatherDataEvent event) {
+    DataGenerator generator = event.getGenerator();
+    generator.addProvider(
+        event.includeClient(),
+        MySounds.REGISTRY.getProvider(generator.getPackOutput())
+    );
+}
+```
+
+### Playing a sound
+
+Use `SimSoundEntry` exactly like a vanilla `SoundEvent`:
+
+```java
+level.playSound(null, blockPos,
+    MySounds.ENGINE_HUM.get(),
+    SoundSource.BLOCKS,
+    1.0f, 1.0f);
+```
+
+<CardGroup cols={1}>
+  <Card title="Aeronautics API reference" icon="code" href="/integration/api/aeronautics-api">
+    APIs for aerial vehicle music and Levitite crystallization.
+  </Card>
+</CardGroup>

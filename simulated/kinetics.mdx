@@ -1,0 +1,144 @@
+---
+title: "Kinetics — Power, Steering, and Motion Blocks"
+description: "The Simulated module provides kinetic and control blocks for physics contraptions: Portable Engine, Steering Wheel, Swivel Bearing, Rope Winch, and more."
+---
+
+Physics contraptions need power sources and control mechanisms that travel with them. The blocks on this page live on the contraption itself and provide rotational force, steering input, spring-return motion, and tethering.
+
+## Portable Engine
+
+The Portable Engine is a self-contained stress source that generates rotational force by burning fuel. It replaces water wheels and windmills for contraptions that cannot stay connected to a fixed kinetic network.
+
+| Property | Value |
+|---|---|
+| Generator speed | 32 RPM (64 RPM when superheated) |
+| Colors | 16 dye colors |
+
+Place fuel (any valid furnace fuel) into the Portable Engine using any automated insertion method. Right-click it to open its information panel and see current fuel and burn time.
+
+Place a **Cake** block directly in front of the engine to superheat it. Every 60 ticks the engine consumes one slice of the cake; while a cake is present and being eaten, the engine runs at **2× its normal speed**. When the cake is fully eaten, the engine returns to standard speed.
+
+The engine can be configured to run clockwise or counterclockwise. A Redstone Comparator placed against the engine reads the remaining burn time.
+
+<Tip>
+  Press **W** on the Portable Engine to open its ponder scene showing fuel insertion, direction configuration, and superheating.
+</Tip>
+
+## Directional Gearshift
+
+The Directional Gearshift is a kinetic routing block that lets redstone control both whether rotation is relayed and in which direction.
+
+| Redstone state | Behavior |
+|---|---|
+| Unpowered | Does not relay rotation |
+| Straight side powered | Relays rotation unchanged |
+| Reverse side powered | Relays rotation with direction reversed |
+| Both sides powered | Stops relaying rotation |
+
+Craft it from an Andesite Casing, a Cogwheel, a Redstone Torch, and a Shaft.
+
+## Analog Transmission
+
+An Analog Transmission behaves like an Encased Cogwheel when unpowered. When it receives an analog redstone signal, it applies a gear ratio between its cogwheel and its shaft proportional to the signal strength — stronger signal means a larger ratio and slower shaft.
+
+When the input comes through the cogwheel rather than the shaft, higher signal strengths speed the shaft up instead. At full signal or at breaking speeds, the shaft and cogwheel disconnect and rotate independently.
+
+<Warning>
+  If the Analog Transmission receives a signal that would push rotational speed above the maximum, the shaft disconnects and a warning appears. Reduce or remove the signal to reconnect.
+</Warning>
+
+Craft it from a Brass Casing, a Shaft, a Cogwheel, and an Electron Tube.
+
+## Steering Wheel
+
+The Steering Wheel is a player-operated kinetic generator. Hold right-click and move the mouse to rotate the wheel. The wheel generates up to 16 SU of stress capacity at 16 RPM.
+
+- Sneaking while turning snaps the angle to 45° intervals.
+- The maximum turning angle is configurable via the value panel.
+- A Redstone Comparator placed against the front or side reads the current wheel angle as an analog signal.
+- A Comparator placed on the back reads whether a player is actively holding the wheel.
+- Right-click with wood planks to change the wheel's visual appearance.
+
+Craft it from a Large Cogwheel, an Andesite Casing, and a Shaft.
+
+## Throttle Lever
+
+The Throttle Lever is a compact analog redstone source. Right-click and drag to set its output signal strength from 0 to 15. Using a Wrench inverts the signal. It is useful anywhere you want a precise, stable analog signal without a full comparator circuit.
+
+Craft it from a Stick and a Brass Casing.
+
+<Tip>
+  Press **W** on the Throttle Lever to open its ponder scene covering dragging, signal output, and inversion.
+</Tip>
+
+## Torsion Spring
+
+The Torsion Spring relays rotation within a configurable angular range. When the driving shaft stops, the spring unwinds and returns to its starting angle.
+
+- The angle limit is set using the value panel on the block.
+- When powered by redstone, the spring locks in place and does not spring back.
+- A Redstone Comparator reads the current spring angle as an analog signal.
+- Stress impact is **16 SU**; stress capacity is **8 SU**.
+
+Craft it from a Shaft, a Spring item, and an Andesite Casing.
+
+<Note>
+  Bearings attached to a Torsion Spring must be configured not to disassemble, or they will interpret the spring's return motion as a disassembly trigger.
+</Note>
+
+## Auger Shaft and Auger Cogwheel
+
+The Auger Shaft transports items axially through a contraption and extracts them from harvesting actors (such as Mechanical Harvesters or Mechanical Saws) connected horizontally.
+
+The **Auger Cogwheel** is an alternate form of the same block that includes a cogwheel interface. You can cycle between Auger Shaft and Auger Cogwheel using a Wrench.
+
+- Encase Auger Shafts with Industrial Iron Blocks for a clean appearance.
+- Item flow is visible on the indicator on the Auger Cog, or by inspecting the shaft while wearing Engineer's Goggles.
+- Items cannot be inserted or extracted from either end of the auger shaft or from the cogwheel face.
+
+Craft an Auger Shaft from a Chute, a Shaft, and an Iron Sheet (yields 2). Convert between forms with a Wrench or by crafting one from the other.
+
+## Swivel Bearing
+
+The Swivel Bearing assembles a group of glued blocks as a sub-contraption that can rotate freely relative to its parent contraption, similar to Create's Mechanical Bearing but designed for physics objects.
+
+- Place the Swivel Bearing facing the block you want to be the anchor of the rotating group.
+- Glue the group of blocks you want to rotate using Super Glue or Honey Glue.
+- Drive the Swivel Bearing's cogwheel shaft with rotational force to assemble and rotate the sub-contraption.
+- Rotational power fed through the axial shaft passes directly through the bearing, uninterrupted, even as it turns.
+
+The **redstone locking behavior** is configurable:
+- Always locked
+- Always unlocked
+- Unpowered → locked
+- Powered → locked
+
+Stress impact is **4 SU**. Craft it from a wooden slab, an Industrial Iron Block, and a Cogwheel.
+
+<Tip>
+  Press **W** on the Swivel Bearing to see three ponder scenes covering basic assembly, redstone locking, and shaft passthrough.
+</Tip>
+
+## Rope Winch and Rope Connector
+
+Ropes tether one contraption to another or to a fixed anchor in the world.
+
+### Rope Connector
+
+The Rope Connector is a lightweight anchor point. Right-click a Rope Connector and then right-click another Rope Connector with a **Rope Coupling** to string rope between them. Two Rope Connectors can be connected to form a passive tether.
+
+Craft it from an Iron Sheet and an Industrial Iron Block.
+
+### Rope Winch
+
+The Rope Winch works like a Rope Connector but is driven by rotational force. When powered, it reels the attached rope in (clockwise) or out (counterclockwise), pulling the connected object closer or allowing it to move further away.
+
+- Connect a Rope Winch to a Rope Connector (not another winch) using a Rope Coupling.
+- Use shears to cut the rope at any time.
+- Right-click while holding a Wrench to slide down a rope manually.
+
+Craft it from an Iron Sheet, a Shaft, and an Industrial Iron Block.
+
+<Note>
+  A pair of Rope Winches cannot connect directly to each other. Always connect a winch to a connector.
+</Note>

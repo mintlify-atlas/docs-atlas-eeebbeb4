@@ -1,0 +1,67 @@
+---
+title: "Mounted Potato Cannon — Redstone-Fired Contraption Weapon"
+description: "The Mounted Potato Cannon is a block-form Potato Cannon you attach to a contraption. Charge it with rotational force and fire it with a redstone signal."
+---
+
+The Mounted Potato Cannon brings Create's handheld Potato Cannon into contraption form. You place it directly on a contraption structure, load it with ammo through automation, spin it up with rotational force, and trigger each shot with a redstone signal. This makes it practical for airships, vehicles, and any other moving assembly that needs ranged capability.
+
+## How it works
+
+### Compatibility with the Potato Cannon
+
+The Mounted Potato Cannon accepts the same projectiles as the standard handheld Potato Cannon — potatoes, eggs, snowballs, and any other item the base Potato Cannon supports. Each projectile type carries its own attack damage and knockback values, which you can inspect with **Aviator's Goggles** or **Engineer's Goggles**.
+
+### Internal inventory
+
+The block has an internal inventory that holds your ammo. You fill it by piping items in through a hopper, funnel, or other Create logistics component attached to the contraption before assembly. During operation, the cannon draws from this inventory automatically each time it fires.
+
+### Rotational charging
+
+Before it can fire, the Mounted Potato Cannon must be charged using rotational force. Connect a shaft or other kinetic component to it and supply rotation until the cannon reaches full charge. The cannon consumes stress capacity (2 SU impact) while charging.
+
+### Redstone firing
+
+Once the cannon is fully charged, a redstone signal fires a single shot. You can hold the signal high for continuous automatic fire — the cannon recharges between shots and fires again on each completed charge cycle.
+
+### Aim direction
+
+The cannon fires along the direction it faces, which is determined by the block's placement orientation when you place it on the contraption structure. Rotate the block before assembling to set the desired firing angle. You cannot change the aim direction after the contraption is assembled without disassembling and repositioning the block.
+
+## Setting up the Mounted Potato Cannon
+
+<Steps>
+  <Step title="Build your contraption structure">
+    Construct the frame or body of your contraption. Leave space for the Mounted Potato Cannon and the kinetic components needed to charge it.
+  </Step>
+  <Step title="Place the cannon in the correct orientation">
+    Place the Mounted Potato Cannon block on the structure facing the direction you want it to shoot. The block's facing direction is locked in at placement time.
+  </Step>
+  <Step title="Connect rotational force">
+    Attach a shaft, gear, or other kinetic component to the cannon so it receives rotation when the contraption is active. The cannon draws 2 SU of stress capacity while charging.
+  </Step>
+  <Step title="Load ammo before assembling">
+    Fill the cannon's internal inventory with your chosen projectiles. Use a hopper or Create funnel to automate reloading through a connected storage system on the contraption.
+  </Step>
+  <Step title="Wire up redstone">
+    Connect a redstone signal source — a lever, a comparator output, or a contraption-mounted redstone component — to the cannon's input face. The cannon fires one shot each time it receives a signal after completing a charge cycle.
+  </Step>
+  <Step title="Assemble the contraption">
+    Assemble the contraption using a Physics Assembler or compatible bearing. Confirm that the cannon, its kinetic input, and its redstone trigger are all part of the assembled structure.
+  </Step>
+  <Step title="Test fire">
+    Power the kinetic network to charge the cannon, then apply the redstone signal. Keep the signal high to fire continuously, or pulse it for single shots.
+  </Step>
+</Steps>
+
+<Warning>
+  Make sure the cannon's barrel is not obstructed by other blocks on your contraption. Projectiles fire along the block's facing axis and will collide with any solid block in the way.
+</Warning>
+
+<CardGroup cols={2}>
+  <Card title="Aeronautics overview" icon="rocket" href="/aeronautics/overview">
+    All Aeronautics components including lift systems and contraption equipment
+  </Card>
+  <Card title="Physics Assembler" icon="wrench" href="/simulated/physics-assembler">
+    Assemble simulated contraptions from a structure using the Physics Assembler
+  </Card>
+</CardGroup>

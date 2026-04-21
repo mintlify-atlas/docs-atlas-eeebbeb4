@@ -1,0 +1,112 @@
+---
+title: "Sensors — Environmental Sensing on Physics Contraptions"
+description: "Simulated sensors output redstone signals from altitude, velocity, orientation, line of sight, lasers, and navigation. ComputerCraft peripherals included."
+---
+
+Sensor blocks read the physical state of your contraption or its surroundings and convert that information into analog redstone signals. Each sensor also exposes a ComputerCraft peripheral so you can read its values directly from Lua scripts.
+
+All sensor blocks carry the `SAFE_NBT` tag, meaning they retain their configuration when assembled into a contraption.
+
+## How sensors output redstone
+
+Every sensor emits a redstone signal on one or more of its output faces. The signal strength (0–15) is proportional to the measured value within a configurable range. You set the minimum and maximum measurement thresholds in each sensor's value panel — right-click the sensor to open it.
+
+A Redstone Comparator placed adjacent to a sensor can read its output without consuming it.
+
+## Altitude Sensor
+
+The Altitude Sensor emits a redstone signal proportional to its Y-level. By default, higher altitude means a stronger signal. You can invert this so signal strength decreases as the contraption climbs.
+
+The minimum and maximum altitudes are configurable in the value panel. The sensor also reports **air pressure**, which decreases at high altitudes — relevant to the Aeronautics module.
+
+When wearing Engineer's Goggles, the contraption's exact altitude and air pressure are visible in the HUD. A Wrench shows more precise altitude changes.
+
+**Recipe:** Paper + Iron Sheet + Andesite Casing (vertical, 1 output)
+
+<Tip>
+  Press **W** on the Altitude Sensor to open its ponder scene covering signal direction, range configuration, and goggles readout.
+</Tip>
+
+## Velocity Sensor
+
+The Velocity Sensor emits a redstone signal proportional to how fast the contraption is moving along its facing axis. The default output direction is away from the direction of motion; you can flip this to output toward the direction of motion.
+
+Configure the speed that corresponds to maximum signal strength using the value panel. Velocity is only measured along the sensor's facing axis — lateral or vertical components of motion do not contribute.
+
+**Recipe:** Propeller + Barrel + Andesite Casing (vertical, 1 output)
+
+## Optical Sensor
+
+The Optical Sensor emits an invisible detection beam in the direction it faces. When a block intersects the beam, the sensor outputs a redstone signal proportional to the block's distance from the sensor — closer means stronger.
+
+- Configure the maximum detection distance using the value panel.
+- Apply a filter item to the sensor to restrict detection to a specific block type. Only the matching block activates the signal.
+- The sensor carries the `SAFE_NBT` tag and retains filter configuration across assembly.
+
+**Recipe:** Amethyst Shard + Electron Tube + Brass Casing (vertical, 1 output)
+
+<Tip>
+  Press **W** on the Optical Sensor to see its detection range, signal scaling, and filter behavior demonstrated.
+</Tip>
+
+## Laser Pointer and Laser Sensor
+
+The Laser Pointer and Laser Sensor work as a pair. The pointer emits a visible beam when powered by redstone; the sensor emits a redstone signal when it detects an unobstructed beam aimed at it.
+
+### Laser Pointer
+
+- The beam is obstructed by solid blocks between the pointer and sensor.
+- Max casting distance is adjustable on the back face of the pointer.
+- Right-click the front or back face with a Wrench to invert the required redstone input.
+- Apply a colored lens (item tag `#simulated:laser_pointer_lens`) to tint the beam.
+
+**Recipe:** Lens + Redstone Torch + Andesite Casing (vertical, 1 output)
+
+### Laser Sensor
+
+- The sensor outputs a signal when the beam is unobstructed and reaches it.
+- Signal strength corresponds to the power level of the laser.
+- Apply a filter item so the sensor only responds to beams of a matching color.
+
+**Recipe:** Tinted Glass + Lens + Andesite Casing (vertical, 1 output)
+
+<Tip>
+  Press **W** on the Laser Pointer or Laser Sensor to open the shared ponder scene covering beam obstruction, sensor activation, color filtering, and inversion.
+</Tip>
+
+## Gimbal Sensor
+
+The Gimbal Sensor emits a redstone signal proportional to the contraption's tilt. It has two independent axes — X and Z — and each axis outputs a signal independently.
+
+- By default, a signal is emitted downhill: the more tilted the contraption, the stronger the signal.
+- The value boxes on the sensor configure the angle that corresponds to maximum signal.
+- Invert the output to emit a stronger signal when the contraption is more upright.
+
+The Gimbal Sensor is built around a Gyroscopic Mechanism, a sequenced-assembly crafting ingredient.
+
+**Recipe:** Compass + Gyroscopic Mechanism + Brass Casing (horizontal, 1 output per axis)
+
+<Tip>
+  Press **W** on the Gimbal Sensor to see signal direction, angle configuration, and axis independence demonstrated.
+</Tip>
+
+## Navigation Table
+
+The Navigation Table accepts a **navigation item** — such as a lodestone compass — and outputs a directional redstone signal toward the item's target. The signal is strongest when the contraption faces directly toward the destination and weaker at oblique angles.
+
+- Insert a navigation item by right-clicking the table.
+- The signal is zero when the contraption faces away from the target.
+- Different navigation items provide different target types: a lodestone compass targets its bound lodestone; other items may target coordinates or named waypoints.
+- The Navigation Table also exposes its target distance and estimated arrival time as display sources for Create's Display boards.
+
+**Recipe:** Brass Sheet + Precision Mechanism + Brass Casing (vertical, 1 output)
+
+<Tip>
+  Press **W** on the Navigation Table to see navigation item insertion, signal direction, and different target types shown in its ponder scene.
+</Tip>
+
+## ComputerCraft integration
+
+Every sensor block on this page exposes a ComputerCraft peripheral when a Computer or Pocket Computer is adjacent to it (including on a moving contraption). You can poll sensor values, configure thresholds, and react to changes entirely in Lua.
+
+See [ComputerCraft Peripherals](/integration/computercraft/peripherals) for the full peripheral API reference for each sensor.

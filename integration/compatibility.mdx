@@ -1,0 +1,27 @@
+---
+title: "Mod compatibility for Create: Simulated"
+description: "Supported mods and versions for Create: Simulated on NeoForge. Covers ComputerCraft, JEI, Nature's Compass, Curios, Sodium, and Iris."
+---
+
+Create: Simulated supports a set of popular mods with dedicated integration. The table below lists each compatible mod, the tested version, and what the integration adds.
+
+<Warning>
+Create: Simulated targets **NeoForge only**. There is no Fabric port. Fabric-side mods and mixed-loader setups are not supported.
+</Warning>
+
+## Compatible mods
+
+| Mod | Version | What it adds |
+|---|---|---|
+| [ComputerCraft: Tweaked](https://modrinth.com/mod/cc-tweaked) | 1.115.1+ | Wraps sensor and contraption blocks as CC peripherals. Read sensor data and control bearings, name plates, and docking connectors from Lua scripts. |
+| [Just Enough Items (JEI)](https://modrinth.com/mod/jei) | 19.21.0.247+ | All Create: Simulated recipes appear in the JEI browser, including the Portable Engine dyeing recipe. |
+| [Nature's Compass](https://modrinth.com/mod/natures-compass) | 3.4.0+ | Create: Simulated biome and structure navigation targets are registered with Nature's Compass, so you can locate relevant world features from the compass UI. |
+| [Curios API](https://modrinth.com/mod/curios) | 9.2.2+ | Enables the Aviator's Goggles to occupy the dedicated head curio slot rather than the vanilla helmet slot, freeing you to wear armour at the same time. |
+| [Sodium](https://modrinth.com/mod/sodium) | 0.6.13+ | Rendering compatibility for Create: Simulated's custom block and contraption renderers. Install Sodium for improved frame rates without visual artefacts. |
+| [Iris Shaders](https://modrinth.com/mod/iris) | 1.8.12+ | Shader compatibility layer. Iris-compatible shader packs render Create: Simulated contraptions and fluids correctly. |
+
+## Notes on optional mods
+
+All listed mods are **optional**. Create: Simulated runs without any of them — the integrations activate automatically when the corresponding mod is present on the same NeoForge instance.
+
+If you use a mod loader pack or modlist that includes an older version of a listed mod, the integration for that mod may be silently disabled or produce a startup warning in the log. Always check the version requirements in the table above if you see unexpected behaviour with one of these mods.

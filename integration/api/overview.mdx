@@ -1,0 +1,56 @@
+---
+title: 'Create: Simulated mod API overview'
+description: 'Integrate your own mod with Create: Simulated and Aeronautics using the published Java APIs. Covers Gradle setup and links to each API module.'
+---
+
+Create: Simulated and Aeronautics both expose Java APIs for mod developers. You can use these APIs to register custom bearing slowdown behavior, define conditional display targets, override stress tooltips, add custom ambient music, and hook into the Levitite crystallization system — all without modifying the mod's source.
+
+This page covers how to declare the dependency in your build. For the actual classes and methods, see the individual API reference pages linked at the bottom.
+
+## Adding the dependency
+
+Declare both modules in your `build.gradle` (or `build.gradle.kts`). The published artifact group and name follow the package structure — replace `VERSION` with the release you are targeting and confirm the exact Maven coordinates from the [Modrinth project page](https://modrinth.com/project/create-aeronautics) or the project's [GitHub repository](https://github.com/Creators-of-Aeronautics/Simulated-Project).
+
+<Tabs>
+  <Tab title="Groovy DSL">
+    ```groovy
+    dependencies {
+        // Simulated core API
+        modImplementation "dev.simulated_team:simulated:VERSION"
+
+        // Aeronautics API (if you need aerial vehicle hooks)
+        modImplementation "dev.eriksonn:aeronautics:VERSION"
+    }
+    ```
+  </Tab>
+  <Tab title="Kotlin DSL">
+    ```kotlin
+    dependencies {
+        // Simulated core API
+        modImplementation("dev.simulated_team:simulated:VERSION")
+
+        // Aeronautics API (if you need aerial vehicle hooks)
+        modImplementation("dev.eriksonn:aeronautics:VERSION")
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Info>
+Both mods target NeoForge only. If your mod supports Fabric, you will need to gate any calls to these APIs behind a loader check.
+</Info>
+
+## What each module provides
+
+**Simulated API** (`dev.simulated_team.simulated.api`) — bearing slowdown controllers, conditional Create display targets, custom stress-impact tooltips, and a sound registration system for contraption sounds.
+
+**Aeronautics API** (`dev.eriksonn.aeronautics.api`) — situational music for aerial vehicles, and the Levitite crystallization pipeline (propagation contexts, catalyzer interactions, and crystallizer management).
+
+<CardGroup cols={2}>
+  <Card title="Simulated API reference" icon="code" href="/integration/api/simulated-api">
+    Classes in `dev.simulated_team.simulated.api`.
+  </Card>
+  <Card title="Aeronautics API reference" icon="code" href="/integration/api/aeronautics-api">
+    Classes in `dev.eriksonn.aeronautics.api`.
+  </Card>
+</CardGroup>

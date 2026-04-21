@@ -1,0 +1,112 @@
+---
+title: "Redstone — Automation Blocks for Simulated Contraptions"
+description: "Simulated redstone blocks include the Accumulator, Inductor, Magnet, Docking Connector, linked receivers, and Linked Typewriter for contraption automation."
+---
+
+The Simulated module includes a suite of redstone automation blocks designed to work on moving contraptions and across wireless links. These blocks let you build feedback loops, dock two contraptions together, attract or repel contraptions with electromagnets, and relay keyboard input into Redstone Link frequencies.
+
+## Redstone Accumulator
+
+The Redstone Accumulator stores an analog redstone value (0–15) and changes it gradually over time based on its inputs.
+
+| Face | Effect |
+|---|---|
+| Back | Increases the stored value |
+| Sides | Decreases the stored value |
+| Front | Outputs the stored value |
+
+The rate of change is configurable in the value panel — delays can be set from a single tick up to one hour. This makes the Accumulator useful for ramping signals up or down smoothly rather than snapping between values.
+
+**Recipe:** Polished Rose Quartz + Brass Sheet + Redstone Torch + Redstone Dust + Stone slabs
+
+<Tip>
+  Press **W** on the Redstone Accumulator to see increase, decrease, and rate configuration demonstrated.
+</Tip>
+
+## Redstone Inductor
+
+The Redstone Inductor outputs an analog signal that gradually changes over time to match its input signal. Rather than immediately forwarding a redstone change, it ramps toward the new value at a configurable rate.
+
+The rate panel supports delays up to one hour, giving you a software low-pass filter for redstone signals. This is useful for smoothing noisy sensor outputs or creating delayed reactions.
+
+Use the **Copy** and **Invert** buttons in the value panel to mirror another inductor's configuration or flip the output polarity.
+
+**Recipe:** Copper Sheet + Brass Sheet + Redstone Torch + Redstone Dust + Stone slabs
+
+## Redstone Magnet
+
+The Redstone Magnet attracts or repels other Redstone Magnets based on signal state and polarity.
+
+- **Opposite poles attract** — two magnets with different polarities pull each other together and attempt to align face-to-face.
+- **Same poles repel** — two magnets with matching polarities push each other apart.
+- Power a Redstone Magnet with redstone to activate it; an unpowered magnet has no effect.
+
+This block is useful for automatic docking approaches, launch mechanisms, and keeping two contraptions at a fixed distance.
+
+**Recipe:** Redstone + Copper Sheet + Industrial Iron Block
+
+<Tip>
+  Press **W** on the Redstone Magnet to see attraction, repulsion, and alignment behavior demonstrated.
+</Tip>
+
+## Docking Connector
+
+The Docking Connector creates a rigid, restorable connection between two contraptions. Two connectors — one on each contraption — extend toward each other; once they are sufficiently aligned, they lock together.
+
+- While locked, the connection is rigid but keeps the two contraptions as independent physics objects.
+- Items and fluids transfer in either direction through a locked docking connection. Insertion and extraction must be set up on both sides of the connection.
+- Either connector can retract to undock.
+- A Redstone Comparator placed on a Docking Connector reads docking progress as an analog signal.
+
+**Recipe:** Pickaxe-mineable; crafting recipe not listed (check JEI or the in-game ponder)
+
+<Tip>
+  Press **W** on the Docking Connector to see alignment, locking, item/fluid transfer, and comparator readout demonstrated.
+</Tip>
+
+## Modulating Linked Receiver
+
+The Modulating Linked Receiver is a wireless redstone receiver that detects the **distance** to a paired Redstone Link operating on the same item frequency.
+
+- Configure a **minimum range** and a **maximum range** in the right-click UI.
+- Redstone Links within the minimum range are received at full signal strength (15).
+- Redstone Links beyond the maximum range produce no signal.
+- Links between the two ranges produce a proportional signal.
+
+This lets you build approach triggers: for example, a docking approach that starts braking when a target Redstone Link comes within 64 blocks.
+
+**Recipe:** Transmitter + Golden Sheet + Brass Casing (vertical, 1 output)
+
+## Directional Linked Receiver
+
+The Directional Linked Receiver is a wireless redstone receiver that detects the **angle** to a paired Redstone Link on the same frequency.
+
+- A Redstone Link directly in front produces the full received signal strength.
+- A shallower angle reduces the received signal proportionally.
+- Links behind the receiver produce no signal at all.
+
+This lets you build steering feedback: your contraption can continuously read how far off-axis a target is and adjust course accordingly.
+
+**Recipe:** Transmitter + Iron Sheet + Brass Casing (vertical, 1 output)
+
+<Tip>
+  Press **W** on the Directional Linked Receiver to see the angular falloff behavior and frequency matching demonstrated.
+</Tip>
+
+## Linked Typewriter
+
+The Linked Typewriter gives you convenient control over many Redstone Link frequencies through keyboard key bindings. Each key you bind sends or toggles the corresponding Redstone Link frequency when the Typewriter is active.
+
+- Right-click to toggle the Typewriter on. While active, movement controls and any assigned keys are taken over.
+- Right-click while sneaking to open the configuration interface.
+- Right-click with a Linked Controller to copy its frequencies onto the Typewriter.
+- Right-click a Redstone Link Receiver with the Typewriter in hand to enter Bind Mode, then press any key to bind it to the link's frequency.
+- Frequency bindings are saved when the Typewriter is broken and restored when it is placed again.
+
+**Recipe:** No fixed recipe — check JEI or the in-game guide.
+
+## ComputerCraft integration
+
+The Docking Connector, Modulating Linked Receiver, and Directional Linked Receiver each expose a ComputerCraft peripheral. You can read docking progress, signal values, and link distances directly from Lua scripts running on a contraption-mounted Computer.
+
+See [ComputerCraft Peripherals](/integration/computercraft/peripherals) for the full API reference.

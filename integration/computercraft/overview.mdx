@@ -1,0 +1,52 @@
+---
+title: 'ComputerCraft integration for Create: Simulated'
+description: 'Use CC:Tweaked to read sensor data and control contraption blocks from Lua scripts. Requires ComputerCraft: Tweaked 1.115.1 or later.'
+---
+
+Create: Simulated exposes a set of sensor and contraption blocks as ComputerCraft peripherals. You can attach a computer to any supported block, wrap it as a peripheral, and query or control it from a Lua script — no separate wiring or redstone logic required.
+
+## Prerequisites
+
+You need **ComputerCraft: Tweaked 1.115.1 or later** installed alongside Create: Simulated. Earlier versions of CC:Tweaked do not register the peripheral API surface that Simulated relies on.
+
+## Wrapping a peripheral
+
+Place a computer adjacent to a supported block. In your Lua program, wrap the side the block is on:
+
+```lua
+-- Wrap the block on the left side of the computer
+local sensor = peripheral.wrap("left")
+
+-- Or find it by peripheral type
+local sensor = peripheral.find("altitude_sensor")
+```
+
+Every Create: Simulated peripheral has a stable type string (listed on the [peripherals reference](/integration/computercraft/peripherals) page) that you can use with `peripheral.find`.
+
+## Example: reading altitude
+
+```lua
+-- Wrap an Altitude Sensor on the left side
+local altimeter = peripheral.wrap("left")
+
+while true do
+    local height = altimeter.getHeight()
+    local pressure = altimeter.getAirPressure()
+
+    print("Height: " .. height .. " blocks")
+    print("Air pressure: " .. pressure)
+
+    sleep(1)
+end
+```
+
+The script reads the sensor's current world height and air pressure once per second. You can drive redstone outputs, print to a monitor, or feed the values into a PID controller for altitude-hold autopilot logic.
+
+<CardGroup cols={2}>
+  <Card title="Peripheral reference" icon="list" href="/integration/computercraft/peripherals">
+    Full method listing for every supported peripheral.
+  </Card>
+  <Card title="Sensors" icon="radio" href="/simulated/sensors">
+    In-world block descriptions for all sensor blocks.
+  </Card>
+</CardGroup>

@@ -1,0 +1,87 @@
+---
+title: "Borehead Bearing — Linear Tunnel Drilling Contraption"
+description: "The Borehead Bearing assembles a contraption that drills forward in a straight line, mining every block in its path and collecting drops into onboard storage."
+---
+
+The Borehead Bearing turns a structure of Rock Cutting Wheels and storage blocks into a self-contained tunneling machine. Unlike a Mechanical Bearing, which rotates a contraption in place, the Borehead Bearing advances the entire contraption forward block by block, mining everything in front of it and collecting the drops.
+
+## What the Borehead Bearing does
+
+The Borehead Bearing attaches to the block directly in front of it and assembles that block — and everything glued to it — as a **Borehead Contraption**. When you power the bearing with rotational force, the contraption moves forward linearly, and every Rock Cutting Wheel in the structure breaks the blocks it encounters. Drops go directly into any inventory blocks included in the contraption.
+
+Key behaviors from the ponder documentation:
+
+- Rock Cutting Wheels break blocks in a range around themselves — wider than a standard drill.
+- Rock Cutting Wheels automatically attach to each other and to adjacent blocks without Super Glue.
+- The bearing **reverses** the direction of incoming rotation and spins the drill at **0.25×** the provided RPM.
+- Mining speed scales with rotational speed input.
+- When onboard storage is full, the contraption stops breaking blocks until you extract items.
+- You can extract items directly from the Borehead Bearing block without disassembling the contraption.
+
+## How it differs from a Mechanical Bearing
+
+A standard Mechanical Bearing assembles a contraption that **rotates** around its axis. The Borehead Bearing assembles a contraption that **translates** — it moves in a straight line forward. Rotation from the power source is what drives that linear advance; the drill head itself also spins as it cuts.
+
+| Feature | Mechanical Bearing | Borehead Bearing |
+|---|---|---|
+| Contraption motion | Rotational | Linear (forward drilling) |
+| Primary use | Windmills, rotating doors, arms | Tunnel drilling, mining |
+| Rotation multiplier | 1× | 0.25× (reversed direction) |
+| Storage required | No | Yes — needed to collect drops |
+
+## Efficiency
+
+The more blocks the Borehead Bearing attempts to break in a single advance step, the slower it operates. A small, dense drill head cuts quickly; a large drill head covering many blocks per layer cuts more slowly.
+
+You can offset this by using **multiple Borehead Bearings** in the same contraption. Each bearing contributes its own cutting capacity, so two bearings on the same drill head roughly halve the time per layer.
+
+<Tip>
+  Design your drill head to match the tunnel cross-section you need, then add a second Borehead Bearing if speed matters. Oversizing the drill head without adding bearings makes each layer take longer.
+</Tip>
+
+## Requirements
+
+A Borehead Bearing will refuse to assemble and display an error if:
+
+- The attached structure contains **no Rock Cutting Wheels** (at least one is required).
+- The attached structure contains **no inventory blocks** (a chest, barrel, or similar is required to collect drops).
+- Onboard storage is already full when you try to advance.
+
+## Building a borehead
+
+<Steps>
+  <Step title="Craft the Borehead Bearing">
+    Craft the Borehead Bearing from a **Wooden Slab**, a **Gearbox**, and an **Industrial Iron Block** (vertical column). It requires a pickaxe to mine and has a stress impact of 8 SU per Rock Cutting Wheel in the drill head.
+  </Step>
+  <Step title="Place the bearing">
+    Place the Borehead Bearing in the tunnel wall or on a support frame, facing the direction you want to drill. The block directly in front of the bearing becomes the root of the drill head contraption.
+  </Step>
+  <Step title="Build the drill head">
+    Place Rock Cutting Wheels in front of the bearing to cover the desired tunnel cross-section. Rock Cutting Wheels attach to each other automatically — you do not need Super Glue between them. Include at least one inventory block (such as a chest) in the structure so drops have somewhere to go.
+  </Step>
+  <Step title="Power the bearing">
+    Connect a rotational source — a Portable Engine, Water Wheel, or any Create stress source — to the shaft on the back of the Borehead Bearing. The bearing needs enough stress capacity to drive all Rock Cutting Wheels in the head.
+  </Step>
+  <Step title="Start drilling">
+    Apply rotational force. The bearing assembles the drill head as a Borehead Contraption and begins advancing. The contraption moves forward one block at a time, breaking every block in the path of the Rock Cutting Wheels and depositing drops into the onboard storage.
+  </Step>
+  <Step title="Manage storage">
+    Monitor the onboard inventory. When storage fills, the contraption halts. Extract items by right-clicking the Borehead Bearing block directly, or pipe items out via a Funnel or other Create extraction method attached to the bearing.
+  </Step>
+</Steps>
+
+## Tips on block clearance and contraption design
+
+- **Match drill width to the tunnel you need.** A 3×3 grid of Rock Cutting Wheels drills a 3×3 tunnel. Larger heads clear more per pass but reduce speed unless you add more bearings.
+- **Keep the frame compact.** Every non-Rock Cutting Wheel block in the drill head adds to the contraption's mass without contributing to cutting. Use storage blocks only where needed.
+- **Leave clearance for the bearing block itself.** The Borehead Bearing stays behind as the contraption advances. Make sure the tunnel it drills is wide enough for the bearing block to remain accessible for item extraction and redstone control.
+- **Use redstone to pause drilling.** Removing rotational force from the bearing stops the advance. Wire in a lever or a signal from a sensor to pause drilling automatically when storage is nearly full.
+
+<CardGroup cols={2}>
+  <Card title="Offroad overview" icon="map" href="/offroad/overview">
+    All Offroad blocks and items at a glance
+  </Card>
+  <Card title="Physics Assembler" icon="hammer" href="/simulated/physics-assembler">
+    How to assemble and disassemble physics contraptions
+  </Card>
+</CardGroup>
